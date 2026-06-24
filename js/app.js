@@ -1,14 +1,15 @@
-import { queryCards, getCardById, setLiveApiMode, isLiveApiActive, applyCard3DEffect } from "./cards-data.js";
-import { initDeckBuilder, addCard } from "./deck-builder.js";
-import { initPackSimulator } from "./pack-simulator.js";
-import { initBinder, addCardsToCollection, toggleWishlist, isCardInWishlist } from "./binder.js";
-import { initTutorial } from "./tutorial.js";
+/**
+ * PokéTCG Premium - Main App Orchestration
+ * Uses window globals (no ES modules) for file:// protocol compatibility
+ */
 
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize Lucide Icons
   if (window.lucide) window.lucide.createIcons();
 
-  // 1. Navigation Panel Switches
+  // =========================================================================
+  // 1. Sidebar Navigation
+  // =========================================================================
   const menuItems = document.querySelectorAll(".menu-item");
   const viewPanels = document.querySelectorAll(".view-panel");
 
@@ -24,223 +25,243 @@ document.addEventListener("DOMContentLoaded", () => {
           panel.classList.add("active");
         }
       });
+
+      // Re-create lucide icons after view switch (icons might be in newly shown panels)
+      if (window.lucide) window.lucide.createIcons();
     });
   });
 
-  // 2. Card Details Modal Interactions
+  // =========================================================================
+  // 2. Card Detail Modal
+  // =========================================================================
   const cardModal = document.getElementById("card-detail-modal");
   const btnCloseModal = document.getElementById("btn-close-modal");
   const modalCloseArea = document.getElementById("modal-close-area");
 
   function openCardModal(cardId) {
-    const card = getCardById(cardId);
+    const card = window.getCardById ? window.getCardById(cardId) : null;
     if (!card) return;
 
-    // Set Rarity
+    // Rarity badge
     const rarityEl = document.getElementById("modal-card-rarity");
-    rarityEl.textContent = card.rarity;
-    
-    // Set Name & Supertype
-    document.getElementById("modal-card-name").textContent = card.name;
-    document.getElementById("modal-card-supertype").textContent = `${card.supertype} - ${card.subtypes.join(" ")}`;
-    
-    // HP and Element type
+    if (rarityEl) rarityEl.textContent = card.rarity || "";
+
+    // Name & supertype
+    const nameEl = document.getElementById("modal-card-name");
+    if (nameEl) nameEl.textContent = card.name;
+
+    const supertypeEl = document.getElementById("modal-card-supertype");
+    if (supertypeEl) {
+      const subtypes = Array.isArray(card.subtypes) ? card.subtypes.join(" ") : "";
+      supertypeEl.textContent = `${card.supertype} - ${subtypes}`;
+    }
+
+    // HP & Type
     const hpEl = document.getElementById("modal-card-hp");
-    hpEl.textContent = card.hp ? `HP ${card.hp}` : "";
-    
+    if (hpEl) hpEl.textContent = card.hp ? `HP ${card.hp}` : "";
+
     const typeLabelEl = document.getElementById("modal-card-type-label");
-    typeLabelEl.textContent = card.types.length > 0 ? `${card.types.join(", ")}` : "";
+    if (typeLabelEl) {
+      const types = Array.isArray(card.types) ? card.types : [];
+      typeLabelEl.textContent = types.length > 0 ? types.join(", ") : "";
+    }
 
     // Price
-    document.getElementById("modal-card-price").textContent = `$${card.marketPrice.toFixed(2)}`;
+    const priceEl = document.getElementById("modal-card-price");
+    if (priceEl) priceEl.textContent = `$${(card.marketPrice || 0).toFixed(2)}`;
 
-    // Set rules & attacks descriptions
+    // Attacks & Rules text
     const textContentEl = document.getElementById("modal-card-text");
-    textContentEl.innerHTML = "";
-    
-    if (card.rules && card.rules.length > 0) {
-      card.rules.forEach(rule => {
-        const p = document.createElement("p");
-        p.style.fontWeight = "600";
-        p.style.marginBottom = "8px";
-        p.textContent = rule;
-        textContentEl.appendChild(p);
-      });
+    if (textContentEl) {
+      textContentEl.innerHTML = "";
+
+      if (card.rules && card.rules.length > 0) {
+        card.rules.forEach(rule => {
+          const p = document.createElement("p");
+          p.style.cssText = "font-weight:600; margin-bottom:8px; font-size:0.85rem;";
+          p.textContent = rule;
+          textContentEl.appendChild(p);
+        });
+      }
+
+      if (card.attacks && card.attacks.length > 0) {
+        card.attacks.forEach(att => {
+          const div = document.createElement("div");
+          div.style.marginBottom = "10px";
+          const costIcons = Array.isArray(att.cost) ? att.cost.map(() => "🔮").join(" ") : "";
+          div.innerHTML = `
+            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:0.95rem;">
+              <span>${costIcons} ${att.name || ""}</span>
+              <span>${att.damage || ""}</span>
+            </div>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-top:2px;">${att.text || ""}</p>
+          `;
+          textContentEl.appendChild(div);
+        });
+      }
     }
 
-    if (card.attacks && card.attacks.length > 0) {
-      card.attacks.forEach(att => {
-        const div = document.createElement("div");
-        div.style.marginBottom = "10px";
-        div.innerHTML = `
-          <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.95rem;">
-            <span>${att.cost.map(() => "🔮").join(" ")} ${att.name}</span>
-            <span>${att.damage || ""}</span>
-          </div>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">${att.text}</p>
-        `;
-        textContentEl.appendChild(div);
-      });
-    }
-
-    // Set 3D image block
+    // 3D card image
     const target3D = document.getElementById("modal-card-3d-target");
-    target3D.innerHTML = "";
-    
-    const card3D = document.createElement("div");
-    card3D.className = "pokemon-card-3d";
-    card3D.style.backgroundImage = `url('${card.imageUrl}')`;
-    
-    target3D.appendChild(card3D);
-    applyCard3DEffect(card3D, card);
+    if (target3D) {
+      target3D.innerHTML = "";
+      const card3D = document.createElement("div");
+      card3D.className = "pokemon-card-3d";
+      card3D.style.backgroundImage = `url('${card.imageUrl}')`;
+      target3D.appendChild(card3D);
+      if (window.applyCard3DEffect) window.applyCard3DEffect(card3D, card);
+    }
 
-    // Bind action buttons
+    // Action buttons — clone to remove old listeners
     const btnAddDeck = document.getElementById("modal-btn-add-deck");
     const btnWishlist = document.getElementById("modal-btn-wishlist");
 
-    // Remove old event listeners
-    const newBtnAddDeck = btnAddDeck.cloneNode(true);
-    const newBtnWishlist = btnWishlist.cloneNode(true);
-    
-    btnAddDeck.parentNode.replaceChild(newBtnAddDeck, btnAddDeck);
-    btnWishlist.parentNode.replaceChild(newBtnWishlist, btnWishlist);
-
-    newBtnAddDeck.addEventListener("click", () => {
-      addCard(cardId);
-    });
-
-    // Check wishlist state
-    if (isCardInWishlist(cardId)) {
-      newBtnWishlist.innerHTML = `<i data-lucide="heart-off"></i> ลบจาก Wishlist`;
-      newBtnWishlist.className = "btn btn-danger";
-    } else {
-      newBtnWishlist.innerHTML = `<i data-lucide="heart"></i> ใส่ Wishlist`;
-      newBtnWishlist.className = "btn btn-secondary";
+    if (btnAddDeck) {
+      const newBtn = btnAddDeck.cloneNode(true);
+      btnAddDeck.parentNode.replaceChild(newBtn, btnAddDeck);
+      newBtn.addEventListener("click", () => {
+        if (window.addCard) window.addCard(cardId);
+      });
     }
-    
+
+    if (btnWishlist) {
+      const newBtn = btnWishlist.cloneNode(true);
+      btnWishlist.parentNode.replaceChild(newBtn, btnWishlist);
+
+      const inWishlist = window.isCardInWishlist ? window.isCardInWishlist(cardId) : false;
+      if (inWishlist) {
+        newBtn.innerHTML = `<i data-lucide="heart-off"></i> ลบจาก Wishlist`;
+        newBtn.className = "btn btn-danger";
+      } else {
+        newBtn.innerHTML = `<i data-lucide="heart"></i> ใส่ Wishlist`;
+        newBtn.className = "btn btn-secondary";
+      }
+
+      newBtn.addEventListener("click", () => {
+        if (window.toggleWishlist) window.toggleWishlist(cardId);
+        if (cardModal) cardModal.classList.add("hidden");
+      });
+    }
+
     if (window.lucide) window.lucide.createIcons();
-
-    newBtnWishlist.addEventListener("click", () => {
-      toggleWishlist(cardId);
-      // Close modal on action
-      cardModal.classList.add("hidden");
-    });
-
-    cardModal.classList.remove("hidden");
+    if (cardModal) cardModal.classList.remove("hidden");
   }
 
-  // Bind close buttons
-  if (btnCloseModal) btnCloseModal.addEventListener("click", () => cardModal.classList.add("hidden"));
-  if (modalCloseArea) modalCloseArea.addEventListener("click", () => cardModal.classList.add("hidden"));
+  if (btnCloseModal) btnCloseModal.addEventListener("click", () => cardModal && cardModal.classList.add("hidden"));
+  if (modalCloseArea) modalCloseArea.addEventListener("click", () => cardModal && cardModal.classList.add("hidden"));
 
-  // Share globally so deck-builder and binder rows can open it
+  // Share globally so sub-modules can open the modal
   window.appOpenCardModal = openCardModal;
 
-  // 3. Search Engine Module
-  const searchInput = document.getElementById("search-input");
-  const filterType = document.getElementById("filter-type");
-  const filterElement = document.getElementById("filter-element");
-  const filterRarity = document.getElementById("filter-rarity");
-  const btnSyncApi = document.getElementById("btn-sync-api");
+  // =========================================================================
+  // 3. Search Engine
+  // =========================================================================
+  const searchInput    = document.getElementById("search-input");
+  const filterType     = document.getElementById("filter-type");
+  const filterElement  = document.getElementById("filter-element");
+  const filterRarity   = document.getElementById("filter-rarity");
+  const btnSyncApi     = document.getElementById("btn-sync-api");
 
   async function performSearch() {
-    const results = await queryCards({
-      name: searchInput.value,
-      type: filterType.value,
-      element: filterElement.value,
-      rarity: filterRarity.value
+    if (!window.queryCards) return;
+    const results = await window.queryCards({
+      name:    searchInput  ? searchInput.value  : "",
+      type:    filterType   ? filterType.value   : "",
+      element: filterElement? filterElement.value: "",
+      rarity:  filterRarity ? filterRarity.value : ""
     });
-
     renderSearchGrid(results);
   }
 
   function renderSearchGrid(cards) {
-    const grid = document.getElementById("search-cards-grid");
-    const countEl = document.getElementById("results-total-count");
+    const grid     = document.getElementById("search-cards-grid");
+    const countEl  = document.getElementById("results-total-count");
     if (!grid) return;
 
     grid.innerHTML = "";
-    countEl.textContent = cards.length;
+    if (countEl) countEl.textContent = cards.length;
 
     cards.forEach(card => {
       const cardContainer = document.createElement("div");
       cardContainer.className = "card-container";
-      
+
       const card3D = document.createElement("div");
       card3D.className = "pokemon-card-3d";
       card3D.style.backgroundImage = `url('${card.imageUrl}')`;
-      
+
       cardContainer.appendChild(card3D);
-      applyCard3DEffect(card3D, card);
+      if (window.applyCard3DEffect) window.applyCard3DEffect(card3D, card);
 
       const summary = document.createElement("div");
       summary.className = "card-info-summary";
       summary.innerHTML = `
         <span class="card-name">${card.name}</span>
         <div class="card-meta">
-          <span>${card.setName}</span>
-          <span class="card-price">$${card.marketPrice.toFixed(2)}</span>
+          <span>${card.setName || ""}</span>
+          <span class="card-price">$${(card.marketPrice || 0).toFixed(2)}</span>
         </div>
       `;
-
       cardContainer.appendChild(summary);
 
-      // Click to view modal
-      card3D.addEventListener("click", () => {
-        openCardModal(card.id);
-      });
-
+      card3D.addEventListener("click", () => openCardModal(card.id));
       grid.appendChild(cardContainer);
     });
   }
 
-  // Trigger search on inputs
-  if (searchInput) searchInput.addEventListener("input", performSearch);
-  if (filterType) filterType.addEventListener("change", performSearch);
+  if (searchInput)   searchInput.addEventListener("input",  performSearch);
+  if (filterType)    filterType.addEventListener("change",  performSearch);
   if (filterElement) filterElement.addEventListener("change", performSearch);
-  if (filterRarity) filterRarity.addEventListener("change", performSearch);
+  if (filterRarity)  filterRarity.addEventListener("change", performSearch);
 
-  // Sync API Button
   if (btnSyncApi) {
     btnSyncApi.addEventListener("click", () => {
-      const active = !isLiveApiActive();
-      setLiveApiMode(active);
+      if (!window.isLiveApiActive || !window.setLiveApiMode) return;
+      const active = !window.isLiveApiActive();
+      window.setLiveApiMode(active);
 
+      const span = btnSyncApi.querySelector("span");
       if (active) {
         btnSyncApi.className = "btn btn-primary";
-        btnSyncApi.querySelector("span").textContent = "เชื่อมต่อ API เรียบร้อย (ค้นหาเพิ่มเติมได้)";
-        alert("เปิดโหมดเชื่อมข้อมูลเรียลไทม์จาก pokemontcg.io แล้ว! พิมพ์ค้นหาการ์ดตั้งแต่ 3 ตัวอักษรขึ้นไปเพื่อดึงการ์ดสดผ่าน API");
+        if (span) span.textContent = "เชื่อมต่อ API เรียบร้อย (ค้นหาเพิ่มเติมได้)";
+        alert("เปิดโหมดเชื่อมข้อมูลเรียลไทม์จาก pokemontcg.io แล้ว!\nพิมพ์ค้นหาการ์ดตั้งแต่ 3 ตัวอักษรขึ้นไปเพื่อดึงการ์ดสดผ่าน API");
       } else {
         btnSyncApi.className = "btn btn-secondary";
-        btnSyncApi.querySelector("span").textContent = "โหลดไลฟ์ API (pokemontcg.io)";
+        if (span) span.textContent = "โหลดไลฟ์ API (pokemontcg.io)";
       }
       performSearch();
     });
   }
 
-  // 4. Initialize Sub Modules
-  initDeckBuilder(openCardModal);
-  
-  initPackSimulator((newCards) => {
-    // Save to binder
-    addCardsToCollection(newCards);
-  });
-  
-  initBinder((collectedTotal) => {
-    // Update global badge
-    const badge = document.getElementById("global-collected-count");
-    if (badge) badge.textContent = collectedTotal;
-  });
-  
-  initTutorial((rewardTicketsCount) => {
-    // Reward tickets callback on completing quiz
-    const lblCount = document.getElementById("pack-tickets-count");
-    if (lblCount) {
-      const oldVal = parseInt(lblCount.textContent) || 0;
-      lblCount.textContent = oldVal + rewardTicketsCount;
-    }
-  });
+  // =========================================================================
+  // 4. Bootstrap Sub-Modules
+  // =========================================================================
+  if (window.initDeckBuilder) {
+    window.initDeckBuilder(openCardModal);
+  }
 
-  // Run initial search display
+  if (window.initPackSimulator) {
+    window.initPackSimulator((newCards) => {
+      if (window.addCardsToCollection) window.addCardsToCollection(newCards);
+    });
+  }
+
+  if (window.initBinder) {
+    window.initBinder((collectedTotal) => {
+      const badge = document.getElementById("global-collected-count");
+      if (badge) badge.textContent = collectedTotal;
+    });
+  }
+
+  if (window.initTutorial) {
+    window.initTutorial((rewardTicketsCount) => {
+      const lblCount = document.getElementById("pack-tickets-count");
+      if (lblCount) {
+        const old = parseInt(lblCount.textContent) || 0;
+        lblCount.textContent = old + rewardTicketsCount;
+      }
+    });
+  }
+
+  // Initial search render
   performSearch();
 });
