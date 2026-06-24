@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PokéTCG Premium | คลังการ์ด จัดเด็ค และจำลองเปิดซองระดับพรีเมียม</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="สัมผัสประสบการณ์จัดการ์ดและจำลองการเล่น Pokémon TCG ในสไตล์เรียบหรู ค้นหาการ์ดสะสม จัดเด็ค และเปิดซองแบบ 3 มิติ">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="pokeball-logo">
+          <div class="pokeball-inner"></div>
+        </div>
+        <h1>Poké<span>TCG</span></h1>
+      </div>
+      
+      <nav class="sidebar-menu">
+        <button class="menu-item active" data-view="search">
+          <i data-lucide="search"></i>
+          <span>ค้นหาการ์ด</span>
+        </button>
+        <button class="menu-item" data-view="deck">
+          <i data-lucide="layers"></i>
+          <span>จัดเด็คการ์ด</span>
+        </button>
+        <button class="menu-item" data-view="pack">
+          <i data-lucide="package-open"></i>
+          <span>จำลองเปิดซอง</span>
+        </button>
+        <button class="menu-item" data-view="binder">
+          <i data-lucide="book-open"></i>
+          <span>อัลบั้มสะสม</span>
+        </button>
+        <button class="menu-item" data-view="tutorial">
+          <i data-lucide="gamepad-2"></i>
+          <span>สอนเล่นการ์ด</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-status">
+          <div class="avatar">P</div>
+          <div class="user-info">
+            <span class="username">สะสมแล้ว: <strong id="global-collected-count">0</strong> ใบ</span>
+            <span class="user-title">Poké Member</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+      <!-- 1. Database Search View -->
+      <section id="search-view" class="view-panel active">
+        <header class="view-header">
+          <div>
+            <h2>🔍 ระบบค้นหาและฐานข้อมูลการ์ดอัจฉริยะ</h2>
+            <p>ค้นหาการ์ดสะสมใน Pokémon TCG พร้อมลูกเล่นโฮโลแกรมสามมิติเสมือนจริง</p>
+          </div>
+          <div class="search-options-wrapper">
+            <button id="btn-sync-api" class="btn btn-secondary">
+              <i data-lucide="refresh-cw"></i>
+              <span>โหลดไลฟ์ API (pokemontcg.io)</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Search Bar and Filters -->
+        <div class="search-bar-container glass">
+          <div class="search-input-group">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" id="search-input" placeholder="ค้นหาการ์ดด้วยชื่อ เช่น Charizard, Mew, Energy...">
+          </div>
+          
+          <div class="filters-grid">
+            <div class="filter-group">
+              <label for="filter-type">ประเภทการ์ด</label>
+              <select id="filter-type">
+                <option value="">ทั้งหมด</option>
+                <option value="pokemon">Pokémon</option>
+                <option value="trainer">Trainer</option>
+                <option value="energy">Energy</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="filter-element">ธาตุ (Energy Type)</label>
+              <select id="filter-element">
+                <option value="">ทั้งหมด</option>
+                <option value="Fire">ไฟ (Fire)</option>
+                <option value="Water">น้ำ (Water)</option>
+                <option value="Grass">หญ้า (Grass)</option>
+                <option value="Lightning">ไฟฟ้า (Lightning)</option>
+                <option value="Psychic">พลังจิต (Psychic)</option>
+                <option value="Fighting">ต่อสู้ (Fighting)</option>
+                <option value="Darkness">มืด (Darkness)</option>
+                <option value="Metal">เหล็ก (Metal)</option>
+                <option value="Dragon">มังกร (Dragon)</option>
+                <option value="Colorless">ไร้สี (Colorless)</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="filter-rarity">ความหายาก (Rarity)</label>
+              <select id="filter-rarity">
+                <option value="">ทั้งหมด</option>
+                <option value="Common">Common</option>
+                <option value="Uncommon">Uncommon</option>
+                <option value="Rare">Rare</option>
+                <option value="Double Rare">Double Rare (ex)</option>
+                <option value="Ultra Rare">Ultra Rare / Full Art</option>
+                <option value="Special Illustration Rare">Special Illustration Rare (SAR)</option>
+                <option value="Hyper Rare">Hyper Rare (Gold UR)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Results Grid -->
+        <div class="search-results-wrapper">
+          <div class="results-count">พบการ์ดทั้งหมด <span id="results-total-count">0</span> ใบ</div>
+          <div class="cards-grid" id="search-cards-grid">
+            <!-- Render cards dynamically here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Deck Builder View -->
+      <section id="deck-view" class="view-panel">
+        <header class="view-header">
+          <div>
+            <h2>🎴 ระบบจัดเด็คเสมือนจริง</h2>
+            <p>สร้างเด็คการ์ด 60 ใบ ตรวจสอบกติกา พร้อมจำลองจั่ว Starting Hand</p>
+          </div>
+          <div class="deck-actions-group">
+            <button id="btn-export-deck" class="btn btn-secondary">
+              <i data-lucide="share-2"></i> ส่งออกเด็ค (Export)
+            </button>
+            <button id="btn-import-deck" class="btn btn-secondary">
+              <i data-lucide="download"></i> นำเข้าเด็ค (Import)
+            </button>
+            <button id="btn-clear-deck" class="btn btn-danger">
+              <i data-lucide="trash-2"></i> ล้างเด็ค
+            </button>
+          </div>
+        </header>
+
+        <div class="deck-builder-layout">
+          <!-- Left Panel: Card Selector -->
+          <div class="deck-cards-selector glass">
+            <div class="panel-header">
+              <h3>คลังเลือกการ์ดเข้าเด็ค</h3>
+              <div class="mini-search">
+                <input type="text" id="deck-search-input" placeholder="ค้นหาการ์ดที่จะใส่...">
+              </div>
+            </div>
+            <div class="cards-mini-grid" id="deck-selector-grid">
+              <!-- Render matching cards here -->
+            </div>
+          </div>
+
+          <!-- Right Panel: Current Deck List & Analysis -->
+          <div class="deck-canvas-panel">
+            <div class="deck-status-bar glass">
+              <div class="deck-count-indicator">
+                จำนวนการ์ด: <span id="deck-total-count">0</span> / 60 ใบ
+                <div class="progress-bar-bg">
+                  <div id="deck-progress-bar" class="progress-bar-fill" style="width: 0%"></div>
+                </div>
+              </div>
+              <div id="deck-validation-badge" class="badge invalid">ไม่สมบูรณ์ (ขาดการ์ด)</div>
+            </div>
+
+            <!-- Visual Deck Canvas -->
+            <div class="deck-columns-canvas glass">
+              <div class="deck-column" data-type="pokemon">
+                <h4>Pokémon (<span id="count-deck-pokemon">0</span>)</h4>
+                <div class="deck-column-cards" id="deck-column-pokemon"></div>
+              </div>
+              <div class="deck-column" data-type="trainer">
+                <h4>Trainer (<span id="count-deck-trainer">0</span>)</h4>
+                <div class="deck-column-cards" id="deck-column-trainer"></div>
+              </div>
+              <div class="deck-column" data-type="energy">
+                <h4>Energy (<span id="count-deck-energy">0</span>)</h4>
+                <div class="deck-column-cards" id="deck-column-energy"></div>
+              </div>
+            </div>
+
+            <!-- Deck Stats & Test Simulator -->
+            <div class="deck-utility-grid">
+              <!-- Stats Breakdown Card -->
+              <div class="utility-card glass">
+                <h3>สัดส่วนสถิติเด็ค</h3>
+                <div class="chart-container">
+                  <div class="bar-chart">
+                    <div class="chart-bar-group">
+                      <span>Pokémon</span>
+                      <div class="bar-fill-bg"><div id="chart-bar-pokemon" class="bar-fill red" style="width: 0%"></div></div>
+                      <span id="chart-lbl-pokemon">0%</span>
+                    </div>
+                    <div class="chart-bar-group">
+                      <span>Trainer</span>
+                      <div class="bar-fill-bg"><div id="chart-bar-trainer" class="bar-fill silver" style="width: 0%"></div></div>
+                      <span id="chart-lbl-trainer">0%</span>
+                    </div>
+                    <div class="chart-bar-group">
+                      <span>Energy</span>
+                      <div class="bar-fill-bg"><div id="chart-bar-energy" class="bar-fill gray" style="width: 0%"></div></div>
+                      <span id="chart-lbl-energy">0%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Starting Hand Simulator -->
+              <div class="utility-card glass">
+                <div class="utility-card-header">
+                  <h3>จำลองจั่วการ์ดแรกเริ่ม (Starting Hand)</h3>
+                  <button id="btn-draw-hand" class="btn btn-primary btn-sm">จั่วใหม่ 7 ใบ</button>
+                </div>
+                <div class="starting-hand-cards" id="starting-hand-container">
+                  <p class="placeholder-text">จัดเด็คให้ได้อย่างน้อย 7 ใบแล้วกดจั่วจำลองที่นี่</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Pack Simulator View -->
+      <section id="pack-view" class="view-panel">
+        <header class="view-header">
+          <div>
+            <h2>📦 เครื่องจำลองการเปิดซองการ์ดสุดอลังการ</h2>
+            <p>ลุ้นเปิดซองสุ่มการ์ด ลุ้นการ์ดระดับพระกาฬ พร้อมลูกเล่น 3 มิติเสมือนจริง</p>
+          </div>
+          <div class="pack-inventory">
+            <span>ซองสะสมที่มี: <strong id="pack-tickets-count">5</strong> ซอง</span>
+          </div>
+        </header>
+
+        <div class="pack-simulator-layout">
+          <!-- Pack Selector & Config -->
+          <div class="pack-selection-panel glass">
+            <h3>เลือกเซตซองการ์ด</h3>
+            <div class="pack-set-list">
+              <div class="pack-set-card active" data-set="sv06">
+                <div class="set-logo-placeholder font-style-pokemon">SV06</div>
+                <div class="set-details">
+                  <h4>Twilight Masquerade</h4>
+                  <p>เซตปัจจุบัน มีหน้ากากยักษ์ Ogerpon สุดแกร่ง</p>
+                </div>
+              </div>
+              <div class="pack-set-card" data-set="sv05">
+                <div class="set-logo-placeholder font-style-pokemon">SV05</div>
+                <div class="set-details">
+                  <h4>Temporal Forces</h4>
+                  <p>พบกับโปเกมอนโบราณและอนาคตทรงพลัง</p>
+                </div>
+              </div>
+              <div class="pack-set-card" data-set="base">
+                <div class="set-logo-placeholder font-style-pokemon">BASE</div>
+                <div class="set-details">
+                  <h4>Base Set (1999)</h4>
+                  <p>ตำนานย้อนยุค ลุ้นลิซาร์ดอน (Charizard) โฮโลใบแรก</p>
+                </div>
+              </div>
+            </div>
+            
+            <button id="btn-buy-pack" class="btn btn-secondary w-full" style="margin-top: 15px;">
+              <i data-lucide="plus-circle"></i> รับฟรีอีก 3 ซอง
+            </button>
+          </div>
+
+          <!-- Pack Opening Canvas -->
+          <div class="pack-opening-canvas-wrapper glass">
+            <div class="pack-opening-canvas" id="pack-opening-stage">
+              <!-- Initial Screen: Sealed Pack -->
+              <div class="sealed-pack-container" id="sealed-pack-screen">
+                <div class="pack-3d" id="pack-3d-model">
+                  <div class="pack-front">
+                    <div class="pack-set-badge">Twilight Masquerade</div>
+                    <div class="pack-mascot"></div>
+                    <div class="pack-rip-line"><span>🪓 เลื่อนสไลด์หรือคลิกที่นี่เพื่อฉีกซอง</span></div>
+                  </div>
+                </div>
+                <button id="btn-rip-pack" class="btn btn-primary btn-lg ripple">ฉีกซองการ์ด!</button>
+              </div>
+
+              <!-- Opening Screen: Unveiled Cards -->
+              <div class="unveiled-cards-container hidden" id="unveiled-cards-screen">
+                <div class="unveiled-cards-wrapper" id="pack-revealed-cards">
+                  <!-- Generated cards will show up here -->
+                </div>
+                <div class="pack-opening-footer">
+                  <button id="btn-collect-pack" class="btn btn-primary btn-lg">เก็บเข้าอัลบั้มสะสม</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Digital Collection Binder View -->
+      <section id="binder-view" class="view-panel">
+        <header class="view-header">
+          <div>
+            <h2>🗂️ อัลบั้มสะสมการ์ดส่วนตัวดิจิทัล (Digital Collection)</h2>
+            <p>เปิดชมการ์ดที่สะสมได้จากการสุ่มเปิดซอง จัดระเบียบในสมุดเก็บการ์ดเสมือนจริง 3D</p>
+          </div>
+          <div class="binder-stats glass-flat">
+            <div class="stat-item">
+              <span>ความก้าวหน้ารวม:</span>
+              <strong id="binder-completion">0%</strong>
+            </div>
+            <div class="stat-item">
+              <span>มูลค่าสะสมจำลอง:</span>
+              <strong id="binder-value">$0.00</strong>
+            </div>
+          </div>
+        </header>
+
+        <div class="binder-layout">
+          <!-- Collection Tabs -->
+          <div class="binder-tab-bar">
+            <button class="binder-tab active" data-tab="collection">การ์ดของฉัน (<span id="lbl-collected-count">0</span>)</button>
+            <button class="binder-tab" data-tab="wishlist">รายการที่อยากได้ (Wishlist)</button>
+          </div>
+
+          <!-- Virtual Book Binder View -->
+          <div class="binder-book-container" id="binder-cards-container">
+            <div class="binder-page-controls">
+              <button id="btn-binder-prev" class="btn btn-circle"><i data-lucide="chevron-left"></i></button>
+              <span id="binder-page-number">หน้า 1 / 1</span>
+              <button id="btn-binder-next" class="btn btn-circle"><i data-lucide="chevron-right"></i></button>
+            </div>
+
+            <!-- Virtual 3x3 Pocket Binder Layout -->
+            <div class="binder-pocket-grid" id="binder-pocket-grid">
+              <!-- Render 9 pocket cells -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Interactive Gameplay Tutorial View -->
+      <section id="tutorial-view" class="view-panel">
+        <header class="view-header">
+          <div>
+            <h2>📖 คู่มือจำลองและเรียนรู้การเล่นพื้นฐาน</h2>
+            <p>ทำความคุ้นเคยกับกระดานเล่น โซนต่างๆ และการต่อสู้จำลองพร้อมอนุมัติผลแดมเมจ</p>
+          </div>
+          <div class="tutorial-quiz-link">
+            <button id="btn-start-quiz" class="btn btn-secondary">
+              <i data-lucide="award"></i> ทำแบบทดสอบรับซองฟรี
+            </button>
+          </div>
+        </header>
+
+        <div class="tutorial-layout">
+          <!-- Step Guides Tabs -->
+          <div class="tutorial-sidebar glass">
+            <h3>บทเรียน</h3>
+            <div class="tutorial-steps-list">
+              <button class="t-step-btn active" data-step="board">1. กระดานและตำแหน่งเล่น (Playmat Setup)</button>
+              <button class="t-step-btn" data-step="phases">2. ลำดับเทิร์น (Turn Sequence)</button>
+              <button class="t-step-btn" data-step="energy">3. การติดพลังงานและต่อสู้ (Energy & Attack)</button>
+              <button class="t-step-btn" data-step="status">4. สถานะผิดปกติ (Status Conditions)</button>
+            </div>
+          </div>
+
+          <!-- Main Interactive Demo Area -->
+          <div class="tutorial-canvas-panel glass">
+            <!-- 1. Playmat Setup Guide -->
+            <div id="t-view-board" class="tutorial-step-view active">
+              <h3>บอร์ดสนามการเล่นโปเกมอนการ์ด (Playmat Setup)</h3>
+              <p class="description">เลื่อนเมาส์ชี้หรือจิ้มโซนต่างๆ บนกระดานเพื่อเรียนรู้ความสำคัญของแต่ละโซน</p>
+              
+              <div class="playmat-visual">
+                <!-- Top Row (Opponent Side - Simplified) -->
+                <div class="playmat-row opponent-bench">
+                  <div class="playmat-zone disabled"> Bench (คู่แข่ง) </div>
+                  <div class="playmat-zone disabled"> Active (คู่แข่ง) </div>
+                </div>
+
+                <!-- Middle Row (Main Battle Arena) -->
+                <div class="playmat-row battle-arena">
+                  <!-- Prize Cards -->
+                  <div class="playmat-zone info-zone" data-info="prizes">
+                    <span class="zone-label">Prize Cards (6 ใบ)</span>
+                    <div class="mini-card-back"></div>
+                    <div class="info-tooltip">การ์ดรางวัล: ชนะคู่แข่งเพื่อหยิบทีละใบ ใครหยิบหมด 6 ใบก่อนชนะ!</div>
+                  </div>
+
+                  <!-- Active Pokémon Zone -->
+                  <div class="playmat-zone info-zone highlighted" data-info="active">
+                    <span class="zone-label">Active Pokémon</span>
+                    <div class="active-pokemon-card-placeholder">
+                      <i data-lucide="shield-alert"></i>
+                      <span>โปเกมอนต่อสู้หลัก</span>
+                    </div>
+                    <div class="info-tooltip">โปเกมอนต่อสู้: ตัวหลักที่ใช้โจมตีในเทิร์น และรับความเสียหายจากคู่แข่ง</div>
+                  </div>
+
+                  <!-- Deck & Discard Pile -->
+                  <div class="deck-discard-wrapper">
+                    <div class="playmat-zone info-zone" data-info="discard">
+                      <span class="zone-label">Discard Pile</span>
+                      <div class="info-tooltip">ตำแหน่งทิ้งการ์ด: โปเกมอนที่สลบ (KO) หรือไอเทมที่ใช้แล้วจะมาอยู่ในนี้</div>
+                    </div>
+                    <div class="playmat-zone info-zone" data-info="deck">
+                      <span class="zone-label">Deck (60 ใบ)</span>
+                      <div class="mini-card-back animate-draw"></div>
+                      <div class="info-tooltip">เด็คการ์ด: ต้องจั่วการ์ด 1 ใบทุกครั้งก่อนเริ่มเทิร์นหลัก</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bottom Row (Player Bench) -->
+                <div class="playmat-row player-bench">
+                  <div class="playmat-zone info-zone" data-info="bench">
+                    <span class="zone-label">Bench (สำรองสูงสุด 5 ตัว)</span>
+                    <div class="bench-placeholders">
+                      <div class="bench-slot"></div>
+                      <div class="bench-slot"></div>
+                      <div class="bench-slot"></div>
+                    </div>
+                    <div class="info-tooltip">โปเกมอนสำรอง: โปเกมอนที่รอเปลี่ยนขึ้นมาสู้ หรือช่วยสนับสนุนสกิล</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Turn Sequence Guide -->
+            <div id="t-view-phases" class="tutorial-step-view hidden">
+              <h3>ลำดับการทำเทิร์นของคุณ (Your Turn Sequence)</h3>
+              <p class="description">ใน 1 เทิร์นของเกมการ์ด โปเกมอน มีขั้นตอนปฏิบัติ 3 ขั้นใหญ่ๆ ดังนี้:</p>
+              
+              <div class="phases-timeline">
+                <div class="timeline-node">
+                  <div class="node-num">1</div>
+                  <div class="node-content">
+                    <h4>จั่วการ์ดเริ่มเทิร์น (Draw Phase)</h4>
+                    <p>จั่วการ์ด 1 ใบจากกองการ์ดเสมอ หากจั่วไม่ได้เพราะการ์ดหมดกอง จะแพ้ทันที</p>
+                  </div>
+                </div>
+                <div class="timeline-node">
+                  <div class="node-num">2</div>
+                  <div class="node-content">
+                    <h4>การกระทำหลักในเทิร์น (Main Action Phase)</h4>
+                    <p>คุณสามารถเลือกลำดับทำอะไรก็ได้ตามนี้:</p>
+                    <ul>
+                      <li>วางโปเกมอน Basic ลงบนเบนช์สำรอง</li>
+                      <li>วิวัฒนาการโปเกมอน (หากวางมาแล้วอย่างน้อย 1 เทิร์น)</li>
+                      <li>ติดการ์ดพลังงาน (Energy) จากบนมือ 1 ใบให้กับโปเกมอนตัวใดก็ได้ 1 ครั้งต่อเทิร์น</li>
+                      <li>ใช้งานการ์ดไอเทม (Trainer - Item) ไม่จำกัดจำนวนครั้ง หรือ การ์ดซัพพอร์ต (Support) ได้ 1 ใบต่อเทิร์น</li>
+                      <li>หนีโปเกมอนต่อสู้ (Retreat) กลับไปเบนช์โดยจ่ายพลังงานหนี</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="timeline-node">
+                  <div class="node-num">3</div>
+                  <div class="node-content">
+                    <h4>สั่งโจมตีและจบเทิร์น (Attack & End Turn)</h4>
+                    <p>สั่งโจมตีด้วยท่าที่พลังงานครบถ้วน คำนวณแดมเมจ จากนั้นเทิร์นของคุณจะจบลงทันทีโดยอัตโนมัติ</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Interactive Energy & Battle Simulator -->
+            <div id="t-view-energy" class="tutorial-step-view hidden">
+              <h3>จำลองการติดพลังงานและการทำแดมเมจ (Battle Simulator)</h3>
+              <p class="description">ทดลองติดพลังงานให้โปเกมอนของคุณ และสั่งต่อสู้เพื่อดูการคำนวณแดมเมจจริง!</p>
+
+              <div class="battle-simulator-arena">
+                <!-- Enemy Pokémon -->
+                <div class="sim-pokemon-card enemy" id="sim-enemy">
+                  <div class="pokemon-meta">
+                    <span class="name">Ogerpon ex</span>
+                    <span class="hp-indicator">HP: <strong id="sim-enemy-hp">210</strong> / 210</span>
+                  </div>
+                  <div class="pokemon-art-placeholder mask-art"></div>
+                  <div class="hp-bar-outer"><div id="sim-enemy-hp-bar" class="hp-bar-inner green" style="width: 100%"></div></div>
+                </div>
+
+                <div class="battle-mid-actions">
+                  <div class="damage-popup hidden" id="damage-popup">-120</div>
+                  <div class="interaction-help">👉 ลากพลังงาน (Fire Energy) มาแปะที่ลิซาร์ดอน หรือคลิกเพื่อเพิ่มพลังงาน</div>
+                  <button id="btn-sim-attack" class="btn btn-danger btn-lg" disabled>🔥 สั่งโจมตี (ต้องการ 2 พลังงาน)</button>
+                  <button id="btn-sim-reset" class="btn btn-secondary btn-sm hidden">เริ่มจำลองใหม่</button>
+                </div>
+
+                <!-- Player Pokémon & Energy Deck -->
+                <div class="sim-player-section">
+                  <div class="sim-pokemon-card player" id="sim-player">
+                    <div class="pokemon-meta">
+                      <span class="name">Charizard ex</span>
+                      <span class="hp-indicator">HP: 330 / 330</span>
+                    </div>
+                    <div class="pokemon-art-placeholder charizard-art"></div>
+                    <div class="attached-energies" id="sim-attached-energies">
+                      <!-- List of attached energies will display as icons -->
+                    </div>
+                    <div class="pokemon-moves">
+                      <div class="move-item">
+                        <span class="move-cost">🔥 🔥</span>
+                        <span class="move-name">Burning Darkness (120+)</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Energy Card to Drag/Click -->
+                  <div class="draggable-energy-source" id="energy-card-source" draggable="true">
+                    <div class="mini-energy-card fire">
+                      <div class="energy-symbol">🔥</div>
+                      <span>พลังงานไฟ</span>
+                    </div>
+                    <span class="drag-hint">ลาก หรือ ดับเบิลคลิกเพื่อติด</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Status Conditions -->
+            <div id="t-view-status" class="tutorial-step-view hidden">
+              <h3>สถานะผิดปกติใน Pokémon TCG (Status Conditions)</h3>
+              <p class="description">เมื่อโปเกมอนต่อสู้ติดสภาวะผิดปกติ จะส่งผลลัพธ์บนหน้าการ์ดดังนี้:</p>
+
+              <div class="status-selector-grid">
+                <button class="status-btn" data-status="poisoned">🧪 พิษ (Poisoned)</button>
+                <button class="status-btn" data-status="burned">🔥 ไหม้ (Burned)</button>
+                <button class="status-btn" data-status="asleep">💤 หลับ (Asleep)</button>
+                <button class="status-btn" data-status="paralyzed">⚡ ชา (Paralyzed)</button>
+                <button class="status-btn" data-status="confused">🌀 สับสน (Confused)</button>
+              </div>
+
+              <div class="status-simulation-box">
+                <div class="status-visual-card" id="status-card-demo">
+                  <div class="card-inner">
+                    <div class="card-inner-text">Charizard ex</div>
+                  </div>
+                  <div class="status-marker" id="status-marker-text">ปกติ</div>
+                </div>
+
+                <div class="status-explanation" id="status-explanation-text">
+                  คลิกปุ่มสถานะด้านบนเพื่อเรียนรู้กติกาและเห็นมุมเอียงของการ์ดจริง
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Interactive Card Modal Detail -->
+  <div class="modal hidden" id="card-detail-modal">
+    <div class="modal-backdrop" id="modal-close-area"></div>
+    <div class="modal-card-content glass">
+      <button class="btn-close" id="btn-close-modal"><i data-lucide="x"></i></button>
+      <div class="modal-body-layout">
+        <div class="modal-card-view-3d">
+          <div class="card-3d-wrapper" id="modal-card-3d-target">
+            <!-- Image loaded dynamically with 3d hover effects -->
+          </div>
+        </div>
+        <div class="modal-card-info">
+          <span class="card-modal-rarity" id="modal-card-rarity">Special Illustration Rare</span>
+          <h2 id="modal-card-name">Charizard ex</h2>
+          <div class="card-supertype" id="modal-card-supertype">Pokémon - Stage 2 ex</div>
+          
+          <div class="card-stats-row">
+            <span id="modal-card-hp">HP 330</span>
+            <span id="modal-card-type-label">🔥 ไฟ (Fire)</span>
+          </div>
+
+          <div class="card-details-divider"></div>
+          
+          <div class="card-text-content" id="modal-card-text">
+            <!-- Dynamic descriptions -->
+          </div>
+
+          <div class="card-details-divider"></div>
+
+          <div class="card-prices-section">
+            <h4>ราคาประมาณในตลาดกลาง (Market Value)</h4>
+            <div class="market-price-box">
+              <span class="price-val" id="modal-card-price">$120.50</span>
+              <span class="price-source">TCGPlayer Average</span>
+            </div>
+          </div>
+
+          <div class="modal-card-actions">
+            <button id="modal-btn-add-deck" class="btn btn-primary"><i data-lucide="plus"></i> ใส่เข้าเด็คการ์ด</button>
+            <button id="modal-btn-wishlist" class="btn btn-secondary"><i data-lucide="heart"></i> ใส่ Wishlist</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Modal -->
+  <div class="modal hidden" id="quiz-modal">
+    <div class="modal-backdrop" id="quiz-close-area"></div>
+    <div class="modal-quiz-content glass">
+      <div class="quiz-header">
+        <h3>🏆 แบบทดสอบความรู้การเล่น Pokémon TCG</h3>
+        <button class="btn-close" id="btn-close-quiz"><i data-lucide="x"></i></button>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-progress">คำถามข้อที่ <span id="quiz-current-idx">1</span> จาก 5</div>
+        <h4 id="quiz-question-text">คำถามจะแสดงผลตรงนี้...</h4>
+        <div class="quiz-options" id="quiz-options-container">
+          <!-- Options rendered dynamically -->
+        </div>
+        <div class="quiz-result-msg hidden" id="quiz-result-msg">คำตอบถูกต้อง!</div>
+      </div>
+      <div class="quiz-footer">
+        <button id="btn-next-quiz" class="btn btn-primary" disabled>ข้อถัดไป</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/cards-data.js"></script>
+  <script src="js/deck-builder.js"></script>
+  <script src="js/pack-simulator.js"></script>
+  <script src="js/binder.js"></script>
+  <script src="js/tutorial.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
