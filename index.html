@@ -13,7 +13,7 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Custom Styling -->
-  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
   <div class="app-container">
@@ -445,6 +445,9 @@
 
             <!-- 2. Turn Sequence Guide -->
             <div id="t-view-phases" class="tutorial-step-view hidden">
+              <div style="float: right; margin-left: 15px; margin-bottom: 10px;">
+                <img src="https://images.pokemontcg.io/sv3pt5/151.png" style="height: 120px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+              </div>
               <h3>ลำดับการทำเทิร์นของคุณ (Your Turn Sequence)</h3>
               <p class="description">ใน 1 เทิร์นของเกมการ์ด โปเกมอน มีขั้นตอนปฏิบัติ 3 ขั้นใหญ่ๆ ดังนี้:</p>
               
@@ -492,6 +495,9 @@
 
             <!-- 3. Interactive Energy & Battle Simulator -->
             <div id="t-view-energy" class="tutorial-step-view hidden">
+              <div style="float: right; margin-left: 15px; margin-bottom: 10px;">
+                <img src="https://images.pokemontcg.io/sv3pt5/4.png" style="height: 120px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+              </div>
               <h3>จำลองการติดพลังงานและการทำแดมเมจ (Battle Simulator)</h3>
               <p class="description">ทดลองติดพลังงานให้โปเกมอนของคุณ และสั่งต่อสู้เพื่อดูการคำนวณแดมเมจจริง!</p>
 
@@ -546,6 +552,9 @@
 
             <!-- 4. Status Conditions -->
             <div id="t-view-status" class="tutorial-step-view hidden">
+              <div style="float: right; margin-left: 15px; margin-bottom: 10px;">
+                <img src="https://images.pokemontcg.io/sv3pt5/110.png" style="height: 120px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+              </div>
               <h3>สถานะผิดปกติใน Pokémon TCG (Status Conditions)</h3>
               <p class="description">เมื่อโปเกมอนต่อสู้ติดสภาวะผิดปกติ จะส่งผลลัพธ์บนหน้าการ์ดดังนี้:</p>
 
@@ -573,6 +582,9 @@
 
             <!-- 5. Evolution -->
             <div id="t-view-evolution" class="tutorial-step-view hidden">
+              <div style="float: right; margin-left: 15px; margin-bottom: 10px;">
+                <img src="https://images.pokemontcg.io/sv3pt5/5.png" style="height: 120px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+              </div>
               <h3>การพัฒนาร่าง (Evolution)</h3>
               <p class="description">คุณสามารถวางการ์ดร่างพัฒนาทับบนโปเกมอนตัวเดิมเพื่อวิวัฒนาการได้ แต่มีกฎว่า <strong>ห้ามพัฒนาร่างโปเกมอนในเทิร์นแรกที่คุณเพิ่งวางโปเกมอนตัวนั้นลงสนาม</strong> และห้ามพัฒนาร่างในเทิร์นแรกสุดของเกม</p>
               
@@ -601,6 +613,9 @@
 
             <!-- 6. Weakness & Resistance -->
             <div id="t-view-weakness" class="tutorial-step-view hidden">
+              <div style="float: right; margin-left: 15px; margin-bottom: 10px;">
+                <img src="https://images.pokemontcg.io/sv2/107.png" style="height: 120px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+              </div>
               <h3>จุดอ่อนและความต้านทาน (Weakness & Resistance)</h3>
               <p class="description">โปเกมอนบางตัวมีธาตุที่แพ้ทาง (Weakness) ซึ่งจะรับแดมเมจ <strong>×2</strong> หรือชนะทาง (Resistance) ซึ่งจะรับแดมเมจน้อยลง <strong>-30</strong></p>
               
@@ -638,6 +653,9 @@
 
             <!-- 7. Trainer Cards -->
             <div id="t-view-trainers" class="tutorial-step-view hidden">
+              <div style="float: right; margin-left: 15px; margin-bottom: 10px;">
+                <img src="https://images.pokemontcg.io/sv1/189.png" style="height: 120px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+              </div>
               <h3>การ์ดเทรนเนอร์ (Trainer Cards)</h3>
               <p class="description">การ์ดเวทมนตร์หรือตัวช่วยต่างๆ แบ่งออกเป็น 3 ประเภทหลักในยุคปัจจุบัน</p>
               
@@ -746,11 +764,11 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/cards-data.js?v=7"></script>
-  <script src="js/deck-builder.js?v=7"></script>
-  <script src="js/pack-simulator.js?v=7"></script>
-  <script src="js/binder.js?v=7"></script>
-  <script src="js/tutorial.js?v=7"></script>
-  <script src="js/app.js?v=7"></script>
+  <script src="js/cards-data.js?v=8"></script>
+  <script src="js/deck-builder.js?v=8"></script>
+  <script src="js/pack-simulator.js?v=8"></script>
+  <script src="js/binder.js?v=8"></script>
+  <script src="js/tutorial.js?v=8"></script>
+  <script src="js/app.js?v=8"></script>
 </body>
 </html>
