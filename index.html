@@ -377,6 +377,9 @@
               <button class="t-step-btn" data-step="phases">2. ลำดับเทิร์น (Turn Sequence)</button>
               <button class="t-step-btn" data-step="energy">3. การติดพลังงานและต่อสู้ (Energy & Attack)</button>
               <button class="t-step-btn" data-step="status">4. สถานะผิดปกติ (Status Conditions)</button>
+              <button class="t-step-btn" data-step="evolution">5. การพัฒนาร่าง (Evolution)</button>
+              <button class="t-step-btn" data-step="weakness">6. จุดอ่อนและความต้านทาน (Weakness & Resistance)</button>
+              <button class="t-step-btn" data-step="trainers">7. การ์ดเทรนเนอร์ (Trainer Cards)</button>
             </div>
           </div>
 
@@ -556,6 +559,107 @@
 
                 <div class="status-explanation" id="status-explanation-text">
                   คลิกปุ่มสถานะด้านบนเพื่อเรียนรู้กติกาและเห็นมุมเอียงของการ์ดจริง
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Evolution -->
+            <div id="t-view-evolution" class="tutorial-step-view hidden">
+              <h3>การพัฒนาร่าง (Evolution)</h3>
+              <p class="description">คุณสามารถวางการ์ดร่างพัฒนาทับบนโปเกมอนตัวเดิมเพื่อวิวัฒนาการได้ แต่มีกฎว่า <strong>ห้ามพัฒนาร่างโปเกมอนในเทิร์นแรกที่คุณเพิ่งวางโปเกมอนตัวนั้นลงสนาม</strong> และห้ามพัฒนาร่างในเทิร์นแรกสุดของเกม</p>
+              
+              <div class="evolution-demo-area">
+                <div class="evo-tree">
+                  <div class="evo-stage basic" id="evo-stage-1">
+                    <div class="evo-card-placeholder charander-art">Charmander (Basic)</div>
+                  </div>
+                  <i data-lucide="arrow-right" class="evo-arrow"></i>
+                  <div class="evo-stage stage1 disabled" id="evo-stage-2">
+                    <div class="evo-card-placeholder charmeleon-art">Charmeleon (Stage 1)</div>
+                  </div>
+                  <i data-lucide="arrow-right" class="evo-arrow"></i>
+                  <div class="evo-stage stage2 disabled" id="evo-stage-3">
+                    <div class="evo-card-placeholder charizard-art">Charizard (Stage 2)</div>
+                  </div>
+                </div>
+                
+                <div class="evo-controls">
+                  <p id="evo-status-text">เทิร์นปัจจุบัน: โปเกมอนเพิ่งถูกลงสนาม</p>
+                  <button id="btn-next-turn-evo" class="btn btn-secondary">จำลองผ่านไป 1 เทิร์น</button>
+                  <button id="btn-evolve-sim" class="btn btn-primary" disabled>✨ กดพัฒนาร่าง!</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Weakness & Resistance -->
+            <div id="t-view-weakness" class="tutorial-step-view hidden">
+              <h3>จุดอ่อนและความต้านทาน (Weakness & Resistance)</h3>
+              <p class="description">โปเกมอนบางตัวมีธาตุที่แพ้ทาง (Weakness) ซึ่งจะรับแดมเมจ <strong>×2</strong> หรือชนะทาง (Resistance) ซึ่งจะรับแดมเมจน้อยลง <strong>-30</strong></p>
+              
+              <div class="weakness-demo-area">
+                <div class="weakness-battle-sim">
+                  <div class="attacker-side">
+                    <div class="mini-card-art charizard-art"></div>
+                    <div class="attacker-info">
+                      <h4>Charizard (ธาตุไฟ 🔥)</h4>
+                      <p>ท่าโจมตี: 100 แดมเมจ</p>
+                    </div>
+                  </div>
+                  
+                  <div class="attack-action-arrow">
+                    <button id="btn-calc-weakness" class="btn btn-danger">คำนวณความเสียหาย</button>
+                    <div id="damage-result-badge" class="badge hidden">100</div>
+                  </div>
+
+                  <div class="defender-side">
+                    <div class="target-selector">
+                      <label>เลือกเป้าหมายการโจมตี:</label>
+                      <select id="sim-target-select">
+                        <option value="normal">Snorlax (ปกติ)</option>
+                        <option value="weakness">Venusaur (ธาตุหญ้า 🌿 - แพ้ไฟ)</option>
+                        <option value="resistance">Blastoise (ธาตุน้ำ 💧 - ถ้าสมมติต้านทานไฟ)</option>
+                      </select>
+                    </div>
+                    <div id="target-defense-info" class="defense-info-box">
+                      จุดอ่อน: ไม่มี | ความต้านทาน: ไม่มี
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. Trainer Cards -->
+            <div id="t-view-trainers" class="tutorial-step-view hidden">
+              <h3>การ์ดเทรนเนอร์ (Trainer Cards)</h3>
+              <p class="description">การ์ดเวทมนตร์หรือตัวช่วยต่างๆ แบ่งออกเป็น 3 ประเภทหลักในยุคปัจจุบัน</p>
+              
+              <div class="trainer-cards-showcase">
+                <div class="trainer-type-card">
+                  <div class="trainer-icon bg-blue"><i data-lucide="backpack"></i></div>
+                  <h4>Item (ไอเทม)</h4>
+                  <p>ใช้งานได้ <strong>กี่ใบก็ได้</strong> ใน 1 เทิร์น ใช้เสร็จแล้วนำไปทิ้งที่ Discard Pile</p>
+                  <span class="example-text">เช่น: Potion, Ultra Ball</span>
+                </div>
+                
+                <div class="trainer-type-card">
+                  <div class="trainer-icon bg-orange"><i data-lucide="user"></i></div>
+                  <h4>Supporter (ซัพพอร์ต)</h4>
+                  <p>ใช้งานได้เพียง <strong>1 ใบ</strong> ต่อ 1 เทิร์นเท่านั้น มักจะมีผลลัพธ์รุนแรงเปลี่ยนเกม</p>
+                  <span class="example-text">เช่น: Professor's Research, Boss's Orders</span>
+                </div>
+
+                <div class="trainer-type-card">
+                  <div class="trainer-icon bg-purple"><i data-lucide="hammer"></i></div>
+                  <h4>Pokémon Tool (อุปกรณ์)</h4>
+                  <p>ติดไว้ที่โปเกมอนเพื่อเพิ่มความสามารถ โปเกมอน 1 ตัวติด Tool ได้เพียง 1 ชิ้น</p>
+                  <span class="example-text">เช่น: Choice Belt, Exp. Share</span>
+                </div>
+                
+                <div class="trainer-type-card">
+                  <div class="trainer-icon bg-green"><i data-lucide="map"></i></div>
+                  <h4>Stadium (สนาม)</h4>
+                  <p>มีผลกับทั้งสองฝ่าย วางบนโต๊ะและจะคงอยู่จนกว่าจะมี Stadium ใบอื่นถูกเล่นทับ</p>
+                  <span class="example-text">เช่น: PokéStop, Path to the Peak</span>
                 </div>
               </div>
             </div>

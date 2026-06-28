@@ -99,6 +99,12 @@ window.initTutorial = function(onRewardTickets) {
 
   // Quiz Setup
   window.setupQuizEngine();
+
+  // Evolution Setup
+  window.setupEvolutionSimulator();
+
+  // Weakness Setup
+  window.setupWeaknessSimulator();
 };
 
 // 4. Combat Simulator (Drag-and-Drop & Attack)
@@ -269,6 +275,87 @@ window.setupStatusSimulator = function() {
       let text = STATUS_EXPLANATIONS[status] || "";
       expl.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     });
+  });
+};
+
+// 5.5 Evolution Simulator
+window.setupEvolutionSimulator = function() {
+  let turnCount = 0;
+  let currentStage = 1;
+
+  const btnNextTurn = document.getElementById("btn-next-turn-evo");
+  const btnEvolve = document.getElementById("btn-evolve-sim");
+  const statusText = document.getElementById("evo-status-text");
+
+  const stage1 = document.getElementById("evo-stage-1");
+  const stage2 = document.getElementById("evo-stage-2");
+  const stage3 = document.getElementById("evo-stage-3");
+
+  if (!btnNextTurn) return;
+
+  btnNextTurn.addEventListener("click", () => {
+    turnCount++;
+    statusText.textContent = `เทิร์นปัจจุบัน: ผ่านไป ${turnCount} เทิร์นแล้ว`;
+    if (currentStage < 3) {
+      btnEvolve.removeAttribute("disabled");
+    }
+  });
+
+  btnEvolve.addEventListener("click", () => {
+    if (currentStage === 1) {
+      stage2.classList.remove("disabled");
+      currentStage = 2;
+      statusText.textContent = "วิวัฒนาการเป็นร่าง 1 สำเร็จ! (รอเทิร์นถัดไปเพื่อวิวัฒนาการต่อ)";
+    } else if (currentStage === 2) {
+      stage3.classList.remove("disabled");
+      currentStage = 3;
+      statusText.textContent = "วิวัฒนาการเป็นร่าง 2 (ร่างสุดยอด) สำเร็จ!";
+      btnNextTurn.setAttribute("disabled", "true");
+    }
+    btnEvolve.setAttribute("disabled", "true");
+    turnCount = 0;
+  });
+};
+
+// 5.6 Weakness Simulator
+window.setupWeaknessSimulator = function() {
+  const select = document.getElementById("sim-target-select");
+  const infoBox = document.getElementById("target-defense-info");
+  const btnCalc = document.getElementById("btn-calc-weakness");
+  const resultBadge = document.getElementById("damage-result-badge");
+
+  if (!select) return;
+
+  select.addEventListener("change", () => {
+    resultBadge.classList.add("hidden");
+    const val = select.value;
+    if (val === "normal") {
+      infoBox.textContent = "จุดอ่อน: ไม่มี | ความต้านทาน: ไม่มี";
+    } else if (val === "weakness") {
+      infoBox.textContent = "จุดอ่อน: ไฟ (×2) | ความต้านทาน: ไม่มี";
+    } else if (val === "resistance") {
+      infoBox.textContent = "จุดอ่อน: ไฟฟ้า (×2) | ความต้านทาน: ไฟ (-30)";
+    }
+  });
+
+  btnCalc.addEventListener("click", () => {
+    const val = select.value;
+    let damage = 100;
+    
+    if (val === "weakness") {
+      damage = 100 * 2;
+    } else if (val === "resistance") {
+      damage = 100 - 30;
+    }
+
+    resultBadge.textContent = damage;
+    resultBadge.classList.remove("hidden");
+    
+    // pop animation
+    resultBadge.style.transform = "scale(1.2)";
+    setTimeout(() => {
+      resultBadge.style.transform = "scale(1)";
+    }, 200);
   });
 };
 
