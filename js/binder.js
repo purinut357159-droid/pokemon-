@@ -21,13 +21,14 @@ window.initBinder = function(onCollectedChange) {
 
   if (btnPrev) btnPrev.addEventListener("click", () => window.changePage(-1));
   if (btnNext) btnNext.addEventListener("click", () => window.changePage(1));
+  if (btnPrev) btnPrev.style.display = "none";
+  if (btnNext) btnNext.style.display = "none";
 
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
       tabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
       window.activeTab = tab.getAttribute("data-tab");
-      window.currentPage = 1;
       window.renderBinderGrid();
     });
   });
@@ -97,7 +98,7 @@ window.updateStats = function() {
   }
 };
 
-// 5. Render 3x3 Binder Grid
+// 5. Render Binder Grid
 window.renderBinderGrid = function() {
   const grid = document.getElementById("binder-pocket-grid");
   const pageLabel = document.getElementById("binder-page-number");
@@ -115,27 +116,16 @@ window.renderBinderGrid = function() {
     sourceCards = window.LOCAL_CARDS.filter(c => window.wishlist.includes(c.id));
   }
 
-  const itemsPerPage = 9;
-  const totalPages = Math.max(Math.ceil(sourceCards.length / itemsPerPage), 1);
-  
-  // Boundary check
-  if (window.currentPage > totalPages) window.currentPage = totalPages;
-  if (window.currentPage < 1) window.currentPage = 1;
-
   if (pageLabel) {
-    pageLabel.textContent = `หน้า ${window.currentPage} / ${totalPages}`;
+    pageLabel.style.display = "none";
   }
 
-  // Slice cards for current page
-  const startIndex = (window.currentPage - 1) * itemsPerPage;
-  const pageCards = sourceCards.slice(startIndex, startIndex + itemsPerPage);
-
-  // Render 9 pockets
-  for (let i = 0; i < 9; i++) {
+  // Render all cards
+  for (let i = 0; i < sourceCards.length; i++) {
     const pocket = document.createElement("div");
-    pocket.className = "pocket-cell empty";
+    pocket.className = "pocket-cell";
 
-    const card = pageCards[i];
+    const card = sourceCards[i];
     if (card) {
       pocket.classList.remove("empty");
 
@@ -188,20 +178,4 @@ window.renderBinderGrid = function() {
   }
 };
 
-// 6. Page Navigation Transitions
-window.changePage = function(direction) {
-  const grid = document.getElementById("binder-pocket-grid");
-  if (!grid) return;
-
-  // Add flip animation class
-  grid.classList.add("flipping");
-
-  setTimeout(() => {
-    window.currentPage += direction;
-    window.renderBinderGrid();
-  }, 220); // render half-way through the animation flip
-
-  setTimeout(() => {
-    grid.classList.remove("flipping");
-  }, 500);
-};
+// 6. Page Navigation Transitions removed

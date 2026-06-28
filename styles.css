@@ -2284,3 +2284,27 @@ h1, h2, h3, h4, h5, h6 {
   font-style: italic;
   margin-top: auto;
 }
+
+/* Tutorial Image Fixes */
+.evo-card-placeholder, .mini-card-art, .status-visual-card, .active-pokemon-card-placeholder, .pokemon-art-placeholder {
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: transparent !important;
+}
+
+.charizard-active-art {
+  background-image: url('https://images.pokemontcg.io/sv3pt5/6.png');
+}
+
+.charmander-art {
+  background-image: url('https://images.pokemontcg.io/sv3pt5/4.png');
+}
+
+.charmeleon-art {
+  background-image: url('https://images.pokemontcg.io/sv3pt5/5.png');
+}
+
+.charizard-art {
+  background-image: url('https://images.pokemontcg.io/sv3pt5/6.png');
+}

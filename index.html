@@ -340,15 +340,9 @@
 
           <!-- Virtual Book Binder View -->
           <div class="binder-book-container" id="binder-cards-container">
-            <div class="binder-page-controls">
-              <button id="btn-binder-prev" class="btn btn-circle"><i data-lucide="chevron-left"></i></button>
-              <span id="binder-page-number">หน้า 1 / 1</span>
-              <button id="btn-binder-next" class="btn btn-circle"><i data-lucide="chevron-right"></i></button>
-            </div>
-
-            <!-- Virtual 3x3 Pocket Binder Layout -->
+            <!-- Scrollable Grid Layout -->
             <div class="binder-pocket-grid" id="binder-pocket-grid">
-              <!-- Render 9 pocket cells -->
+              <!-- Render cards here -->
             </div>
           </div>
         </div>
@@ -409,8 +403,7 @@
                   <!-- Active Pokémon Zone -->
                   <div class="playmat-zone info-zone highlighted" data-info="active">
                     <span class="zone-label">Active Pokémon</span>
-                    <div class="active-pokemon-card-placeholder">
-                      <i data-lucide="shield-alert"></i>
+                    <div class="active-pokemon-card-placeholder charizard-active-art">
                       <span>โปเกมอนต่อสู้หลัก</span>
                     </div>
                     <div class="info-tooltip">โปเกมอนต่อสู้: ตัวหลักที่ใช้โจมตีในเทิร์น และรับความเสียหายจากคู่แข่ง</div>
@@ -550,7 +543,7 @@
               </div>
 
               <div class="status-simulation-box">
-                <div class="status-visual-card" id="status-card-demo">
+                <div class="status-visual-card charizard-art" id="status-card-demo">
                   <div class="card-inner">
                     <div class="card-inner-text">Charizard ex</div>
                   </div>
@@ -571,15 +564,15 @@
               <div class="evolution-demo-area">
                 <div class="evo-tree">
                   <div class="evo-stage basic" id="evo-stage-1">
-                    <div class="evo-card-placeholder charander-art">Charmander (Basic)</div>
+                    <div class="evo-card-placeholder charmander-art"></div>
                   </div>
                   <i data-lucide="arrow-right" class="evo-arrow"></i>
                   <div class="evo-stage stage1 disabled" id="evo-stage-2">
-                    <div class="evo-card-placeholder charmeleon-art">Charmeleon (Stage 1)</div>
+                    <div class="evo-card-placeholder charmeleon-art"></div>
                   </div>
                   <i data-lucide="arrow-right" class="evo-arrow"></i>
                   <div class="evo-stage stage2 disabled" id="evo-stage-3">
-                    <div class="evo-card-placeholder charizard-art">Charizard (Stage 2)</div>
+                    <div class="evo-card-placeholder charizard-art"></div>
                   </div>
                 </div>
                 
