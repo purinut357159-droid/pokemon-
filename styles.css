@@ -612,6 +612,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   padding: 15px;
   height: 100%;
+  min-height: 0;
 }
 
 .deck-cards-selector .panel-header {
@@ -681,6 +682,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: 20px;
   height: 100%;
   overflow-y: auto;
+  min-height: 0;
 }
 
 .deck-status-bar {
@@ -1232,6 +1234,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: space-between;
   box-shadow: inset 0 0 40px rgba(0,0,0,0.02);
+  min-height: 0;
   position: relative;
   overflow: hidden;
 }
@@ -1324,6 +1327,8 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .tutorial-steps-list {
@@ -1360,6 +1365,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   gap: 20px;
   overflow-y: auto;
+  min-height: 0;
 }
 
 .tutorial-step-view {
