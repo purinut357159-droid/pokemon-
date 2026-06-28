@@ -2284,3 +2284,7 @@ h1, h2, h3, h4, h5, h6 {
 .charizard-art {
   background-image: url('https://images.pokemontcg.io/sv3pt5/6.png');
 }
+
+.tutorial-hero-banner { width: 100%; height: 180px; border-radius: 12px; margin-bottom: 25px; overflow: hidden; position: relative; box-shadow: 0 8px 24px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); }
+.tutorial-hero-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.5s ease; }
+.tutorial-hero-banner:hover img { transform: scale(1.05); }
