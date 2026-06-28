@@ -13,7 +13,7 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Custom Styling -->
-  <link rel="stylesheet" href="styles.css?v=11">
+  <link rel="stylesheet" href="styles.css?v=12">
 </head>
 <body>
   <div class="app-container">
@@ -364,6 +364,9 @@
 
         <div class="tutorial-layout">
           
+          
+          
+          
           <!-- Step Guides Tabs -->
           <div class="tutorial-sidebar glass">
             <h3>บทเรียน Official</h3>
@@ -378,319 +381,1036 @@
             </div>
           </div>
 
-<!-- Main Interactive Demo Area -->
-          <div class="tutorial-canvas-panel glass">
-            <!-- 1. Playmat Setup Guide -->
-            <div id="t-view-board" class="tutorial-step-view active">
-              <div class="tutorial-hero-banner">
-                <img src="assets/tutorial/playmat.png" alt="Playmat Setup">
-              </div>
-              <h3>บอร์ดสนามการเล่นโปเกมอนการ์ด (Playmat Setup)</h3>
-              <p class="description">เลื่อนเมาส์ชี้หรือจิ้มโซนต่างๆ บนกระดานเพื่อเรียนรู้ความสำคัญของแต่ละโซน</p>
-              
-              <div class="playmat-visual">
-                <!-- Top Row (Opponent Side - Simplified) -->
-                <div class="playmat-row opponent-bench">
-                  <div class="playmat-zone disabled"> Bench (คู่แข่ง) </div>
-                  <div class="playmat-zone disabled"> Active (คู่แข่ง) </div>
-                </div>
 
-                <!-- Middle Row (Main Battle Arena) -->
-                <div class="playmat-row battle-arena">
-                  <!-- Prize Cards -->
-                  <div class="playmat-zone info-zone" data-info="prizes">
-                    <span class="zone-label">Prize Cards (6 ใบ)</span>
-                    <div class="mini-card-back"></div>
-                    <div class="info-tooltip">การ์ดรางวัล: ชนะคู่แข่งเพื่อหยิบทีละใบ ใครหยิบหมด 6 ใบก่อนชนะ!</div>
-                  </div>
+          <!-- Main Interactive Demo Area -->
+          <div class="tutorial-canvas-panel glass official-tutorial">
+            <!-- 1. ประเภทของการ์ดและวิธีดูการ์ด -->
+            <div id="t-view-types" class="tutorial-step-view active">
+              <div class="official-content">
+<div class="h1-caption">
+	การ์ดแบ่งใหญ่ ๆ ได้ 4 ประเภท
+</div>
 
-                  <!-- Active Pokémon Zone -->
-                  <div class="playmat-zone info-zone highlighted" data-info="active">
-                    <span class="zone-label">Active Pokémon</span>
-                    <div class="active-pokemon-card-placeholder charizard-active-art">
-                      <span>โปเกมอนต่อสู้หลัก</span>
-                    </div>
-                    <div class="info-tooltip">โปเกมอนต่อสู้: ตัวหลักที่ใช้โจมตีในเทิร์น และรับความเสียหายจากคู่แข่ง</div>
-                  </div>
+<div class="page-nav">
+	<ul>
+		<li><a href="#card-menu1"><span>โปเกมอน</span></a></li>
+		<li><a href="#card-menu2"><span>พลังงาน</span></a></li>
+		<li><a href="#card-menu3"><span>เทรนเนอร์</span></a></li>
+		<li><a href="#card-menu4"><span>การ์ดพิเศษ</span></a></li>
+	</ul>
+</div>
 
-                  <!-- Deck & Discard Pile -->
-                  <div class="deck-discard-wrapper">
-                    <div class="playmat-zone info-zone" data-info="discard">
-                      <span class="zone-label">Discard Pile</span>
-                      <div class="info-tooltip">ตำแหน่งทิ้งการ์ด: โปเกมอนที่สลบ (KO) หรือไอเทมที่ใช้แล้วจะมาอยู่ในนี้</div>
-                    </div>
-                    <div class="playmat-zone info-zone" data-info="deck">
-                      <span class="zone-label">Deck (60 ใบ)</span>
-                      <div class="mini-card-back animate-draw"></div>
-                      <div class="info-tooltip">เด็คการ์ด: ต้องจั่วการ์ด 1 ใบทุกครั้งก่อนเริ่มเทิร์นหลัก</div>
-                    </div>
-                  </div>
-                </div>
+<h2 id="card-menu1">โปเกมอน</h2>
 
-                <!-- Bottom Row (Player Bench) -->
-                <div class="playmat-row player-bench">
-                  <div class="playmat-zone info-zone" data-info="bench">
-                    <span class="zone-label">Bench (สำรองสูงสุด 5 ตัว)</span>
-                    <div class="bench-placeholders">
-                      <div class="bench-slot"></div>
-                      <div class="bench-slot"></div>
-                      <div class="bench-slot"></div>
-                    </div>
-                    <div class="info-tooltip">โปเกมอนสำรอง: โปเกมอนที่รอเปลี่ยนขึ้นมาสู้ หรือช่วยสนับสนุนสกิล</div>
-                  </div>
-                </div>
+<p>คือการ์ดที่ใช้ท่าต่อสู้โจมตีโปเกมอนฝ่ายตรงข้าม หรือรับการโจมตีจากฝ่ายตรงข้าม HP (พลังกาย) หรือท่าต่อสู้จะแตกต่างกันไปตามชนิดของโปเกมอน
+เมื่อได้รับแดเมจจนไม่มี HP เหลืออีกแล้ว โปเกมอนนั้นจะ [หมดสภาพ] และสู้ต่อไปอีกไม่ได้</p>
+
+<div class="tutorial-official-list">
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_1-01.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">1</span>ชื่อ
+			</div>
+			<div class="text">ชื่อของการ์ดโปเกมอน การ์ดชื่อเดียวกันสามารถใส่ในเด็คได้สูงสุด 4 ใบ
+</div>
+			<div class="caption-number">
+				<span class="number">2</span>HP
+			</div>
+			<div class="text">พลังกายของโปเกมอนนี้ เมื่อได้รับแดเมจจนถึงตัวเลขนี้ ก็จะ [หมดสภาพ]</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_1-02.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">3</span>ประเภท
+			</div>
+			<div class="text">ประเภทของโปเกมอนนี้ 
+ประเภทของโปเกมอนจะมีผลต่อ [จุดอ่อน・ความต้านทาน]</div>
+			<div class="caption-number">
+				<span class="number">4</span>สัญลักษณ์วิวัฒนาการ
+			</div>
+			<div class="text">แสดงลำดับขั้นของวิวัฒนาการ ได้แก่ [พื้นฐาน] [ร่าง 1] [ร่าง 2]</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_1-03.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">5</span>ความสามารถ
+			</div>
+			<div class="text">เอฟเฟกต์ที่การ์ดมีเป็นคนละอย่างกับท่าต่อสู้
+แม้จะใช้เอฟเฟกต์ของความสามารถแต่เทิร์นจะยังไม่จบ</div>
+			<div class="caption-number">
+				<span class="number">6</span>ท่าต่อสู้
+			</div>
+			<div class="text">ท่าต่อสู้ที่โปเกมอนนี้มี ใช้โจมตีฝ่ายตรงข้าม หรือใช้เอฟเฟกต์ต่าง ๆ</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_1-04.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">7</span>จุดอ่อน
+			</div>
+			<div class="text">แดเมจจากท่าต่อสู้ที่ได้รับจากฝ่ายตรงข้ามของประเภทนี้ จะเพิ่มเป็น 2 เท่า</div>
+			<div class="caption-number">
+				<span class="number">8</span>ความต้านทาน
+			</div>
+			<div class="text">แดเมจจากท่าต่อสู้ที่ได้รับจากฝ่ายตรงข้ามของประเภทนี้ จะลดลงตามจำนวนที่เขียนไว้</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_1-05.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">9</span>หนี
+			</div>
+			<div class="text">เมื่อโปเกมอนนี้ย้ายจากตำแหน่งต่อสู้มาที่เบนช์จะเรียกว่า [หนี]
+ที่เขียนไว้นี้คือจำนวนพลังงานที่จำเป็นต้องทิ้ง
+(หมายถึงการวางการ์ดที่ตำแหน่งทิ้งการ์ด) จากโปเกมอนนี้ เพื่อทำการ [หนี]</div>
+			<div class="caption-number">
+				<span class="number">10</span>สัญลักษณ์เรกกูเลชัน
+			</div>
+			<div class="text">สัญลักษณ์ที่นำไปใช้ในอีเวนต์อย่างเป็นทางการ ฯลฯ</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_1-06.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">11</span>สัญลักษณ์เอ็กซ์แพนชัน
+			</div>
+			<div class="text">สัญลักษณ์ที่ทำเป็นจุดสังเกตเพื่อบอกว่าเป็นการ์ดที่อยู่ในสินค้าชุดไหน</div>
+			<div class="caption-number">
+				<span class="number">12</span>สัญลักษณ์แรร์ริตี้
+			</div>
+			<div class="text">สัญลักษณ์แสดงความหายากของการ์ดนี้ จะอยู่ในการ์ดชุดเสริม</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_1-07.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">13</span>คอลเลกชันนัมเบอร์
+			</div>
+			<div class="text">บอกจำนวนการ์ดทั้งหมดของการ์ดในสินค้าชุดนี้
+และการ์ดนี้เป็นการ์ดหมายเลขที่เท่าไหร่</div>
+			<div class="caption-number">
+				<span class="number">14</span>ข้อมูลโปเกมอน
+			</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_1-08.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">15</span>คำอธิบายโปเกมอน
+			</div>
+			<div class="text">　</div>
+			<div class="caption-number">
+				<span class="number">16</span>ชื่อนักวาด
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="image-box">
+	<p>การ์ดมีทั้งด้านหน้าและด้านหลัง ด้านหลังจะเหมือนกันหมด</p>
+	<img decoding="async" src="assets/tutorial/official/th_rules_1-09.png" alt="" />
+</div>
+
+<h3>ลำดับขั้นของวิวัฒนาการ</h3>
+
+<p>การ์ดโปเกมอนจะมีการ์ดที่วิวัฒนาการจาก
+[โปเกมอนพื้นฐาน] ไป [โปเกมอนร่าง 1] และ [โปเกมอนร่าง 2] ด้วย<br>
+ลำดับขั้นของวิวัฒนาการ ตรวจสอบได้จาก [สัญลักษณ์วิวัฒนาการ] ที่อยู่ด้านบนฝั่งซ้ายของการ์ด</p>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/th_rules_1-10.png" alt="" />
+</div>
+
+<h3>วิธีการวิวัฒนาการ</h3>
+
+<p>ถ้ามี [โปเกมอนวิวัฒนาการ] อยู่บนมือที่สามารถวิวัฒนาการจากโปเกมอนบนตำแหน่งต่อสู้หรือบนเบนช์ฝ่ายเราได้ ให้วางโปเกมอนที่มีสัญลักษณ์วิวัฒนาการซ้อนทับไว้ด้านบนเพื่อให้วิวัฒนาการ ไม่สามารถวาง [โปเกมอนร่าง 1] [โปเกมอนร่าง 2] บนกระดานได้โดยตรง
+<br>
+ใน 1 เทิร์นสามารถให้วิวัฒนาการกี่ตัวก็ได้ แต่ไม่สามารถวิวัฒนาการโปเกมอนที่เพิ่งวางบนกระดานหรือเพิ่งให้วิวัฒนาการไปได้</p>
+
+<h3>ประเภทของโปเกมอน</h3>
+
+<p>&#8220;โปเกมอนแบ่งได้เป็นหลายประเภท แต่ละประเภทจะมีความเข้ากันได้หรือไม่ได้ซึ่งกันและกัน (จุดอ่อน・ความต้านทาน)
+รู้ประเภทได้จากสัญลักษณ์ด้านบนฝั่งขวาของการ์ด แดเมจที่ได้รับจะเปลี่ยนไปตามจุดอ่อนหรือความต้านทาน&#8221;</p>
+
+<a href="/th/rules/howtoplay/basic_rules05/#card-menu4" class="link arrow">จุดอ่อนและความต้านทานดูที่นี่</a>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/th_rules_1-11.png" alt="" />
+</div>
+
+<h3>ความเข้ากันได้ของแต่ละประเภท</h3>
+
+<p>ถ้ามีจุดอ่อน แดเมจที่ทำจะกลายเป็น 2 เท่า ถ้ามีความต้านทานแดเมจที่ได้รับจะลดลงตามจำนวนที่เขียนไว้</p>
+
+<h2 id="card-menu2">พลังงาน</h2>
+
+<p>การ์ดที่จำเป็นเพื่อให้โปเกมอนใช้ท่าต่อสู้ หรือ [หนี] กลับบนเบนซ์ ใช้ติดกับโปเกมอนที่อยู่บนกระดาน</p>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/th_rules_1-12.png" alt="" />
+</div>
+
+<ul class="article-list">
+	<li>ไม่มีพลังงานพื้นฐานประเภทไร้สี</li>
+	<li>พลังงานพื้นฐานสามารถใส่ในเด็คกี่ใบก็ได้</li>
+</ul>
+
+<h3>พลังงานพิเศษ</h3>
+
+<p>พลังงานพิเศษนั้นไม่เพียงแค่ให้พลังงานแก่โปเกมอนเท่านั้นแต่ยังมีเอฟเฟกต์พิเศษด้วย มีหลายประเภท</p>
+
+<div class="images row-1">
+	<img decoding="async" class="sp-card-image" src="assets/tutorial/official/th_rules_1-13.png" alt="" />
+</div>
+
+<h2 id="card-menu3">เทรนเนอร์</h2>
+
+<p>การ์ดช่วยเหลือการต่อสู้ที่มีเอฟเฟกต์หลากหลาย แบ่งเป็น [ไอเท็ม] [ซัพพอร์ต] เป็นต้น แตกต่างกันตามวิธีใช้และเอฟเฟกต์
+</p>
+
+<h3>การ์ดไอเท็ม</h3>
+
+<p>คือการ์ดเทรนเนอร์ที่สามารถใช้กี่ใบก็ได้ในเทิร์นฝ่ายเรา เมื่อ
+ใช้แล้ว ให้ทำตามสิ่งที่เขียนไว้บนการ์ดแล้วทิ้งที่ตำแหน่งทิ้ง
+การ์ด</p>
+
+<div class="images row-1">
+	<img decoding="async" class="sp-card-image" src="assets/tutorial/official/th_rules_1-14.png" alt="" />
+</div>
+
+<h3>การ์ดไอเท็มติดโปเกมอน</h3>
+
+<ul class="article-list list">
+	<li>เมื่อใช้แล้ว ให้ติดไว้ที่โปเกมอน<br>
+เมื่อติดแล้ว ให้ติดไว้เช่นนั้นจนกว่าโปเกมอนนั้นจะ [หมดสภาพ] (แม้จะจบเทิร์น, [หนี], หรือวิวัฒนาการ ก็จะไม่ทิ้งการ์ดนี้ที่ตำแหน่งทิ้งการ์ด)</li>
+	<li>[ไอเท็มติดโปเกมอน] สามารถใช้กี่ใบก็ได้ในเทิร์นฝ่ายเรา แต่โปเกมอน 1 ตัวสามารถติดได้เพียง 1 ใบ โปเกมอนที่ติด
+[ไอเท็มติดโปเกมอน] แล้วจะติดเพิ่มอีก 1 ใบหรือสลับใบอื่นมาติดไม่ได้</li>
+</ul>
+
+<div class="images row-1">
+	<img decoding="async" class="sp-card-image" src="assets/tutorial/official/th_rules_1-15.png" alt="" />
+</div>
+
+<h3>การ์ดซัพพอร์ต</h3>
+
+<p>คือการ์ดเทรนเนอร์ที่สามารถใช้ได้เพียง 1 ใบในเทิร์นฝ่ายเรา เมื่อใช้แล้ว ให้ทำตามสิ่งที่เขียนไว้บนการ์ดแล้วทิ้งที่ตำแหน่งทิ้งการ์ด</p>
+
+<ul class="article-list">
+	<li>ไม่สามารถใช้ได้ในเทิร์นแรกสุดของฝ่ายเริ่มเล่นก่อน</li>
+</ul>
+
+<div class="images row-1">
+	<img decoding="async" class="sp-card-image" src="assets/tutorial/official/th_rules_1-16.png" alt="" />
+</div>
+
+<h3>การ์ดสเตเดียม</h3>
+
+<p>คือการ์ดเทรนเนอร์ที่นำการเปลี่ยนแปลงมาสู่กระดานเกม</p>
+
+<ul class="article-list list">
+	<li>ใช้ได้ 1 ใบเท่านั้นในเทิร์นฝ่ายเรา</li>
+	<li>เมื่อใช้แล้ว ให้วางไว้บนกระดานตามเดิม</li>
+	<li>เมื่อมีผู้เล่นฝ่ายใดฝ่ายหนี่งนำการ์ดสเตเดียมชื่ออื่นออกมาใหม่ ให้ทิ้งการ์ดสเตเดียมที่นำออกมาไว้ก่อนแล้วที่ตำแหน่งทิ้งการ์ดของเจ้าของการ์ดนั้น ไม่สามารถนำการ์ดสเตเดียมจากบนมือที่มีชื่อเหมือนกับการ์ดสเตเดียมที่วางไปแล้วออกมาใช้ได้</li>
+</ul>
+
+<div class="images row-1">
+	<img decoding="async" class="sp-card-image" src="assets/tutorial/official/th_rules_1-17.png" alt="" />
+</div>
+
+<h2 id="card-menu4">การ์ดพิเศษ</h2>
+
+<h3>โปเกมอน<big>ex</big></h3>
+
+<p>คือการ์ดโปเกมอนพิเศษที่มี [<big>ex</big>] อยู่ที่ชื่อ</p>
+
+<div class="images row-1">
+	<img decoding="async" class="sp-card-image" src="assets/tutorial/official/th_rules_1-18.png" alt="" />
+</div>
+
+<div class="image-caption">
+	<div class="caption-number">
+		<span class="number">1</span>ชื่อโปเกมอน
+	</div>
+	<div class="text">เคลดิโอและเคลดิโอ<big>ex</big> ถือเป็นการ์ดคนละชื่อกัน</div>
+	<div class="caption-number">
+		<span class="number">2</span>กฎโปเกมอน<big>ex</big>
+	</div>
+	<div class="text mb-24px">“มีกฎพิเศษคือ เมื่อโปเกมอน<big>ex</big> [หมดสภาพ] ฝ่ายตรงข้าม จะหยิบการ์ดรางวัลได้ 2 ใบ”</div>
+
+	<div class="text"><strong>*“โปเกมอนที่มีกฎ&#8221; คือ</strong><br>
+        *จะเรียกโปเกมอน <big>ex</big> ที่มี &#8220;กฎ <big>ex</big>&#8221; ว่า &#8220;โปเกมอนที่มีกฎ&#8221; ถ้ามีการระบุไว้ในเอฟเฟตก์ของท่าต่อสู้หรือคำอธิบายบนหน้าการ์ดว่า &#8220;โปเกมอนที่มีกฎ&#8221; นั่นหมายถึงการ์ดเหล่านี้ </div>
+</div>
+
+
+<div class="image-box">
+    <h4>โปเกมอนวิวัฒนาการเมก้า<big>ex</big></h4>
+
+    <div class="images row-1 mb-40px">
+        <img decoding="async" class="sp-card-image" src="assets/tutorial/official/th_rules_1-19.png" alt="" />
+    </div>
+
+    <p>โปเกมอนที่มีท่าต่อสู้ที่ทรงพลังยิ่งขึ้นและ HP สูงกว่าในบรรดาโปเกมอน<big>ex</big><br>
+        อีกทั้งมีกฎพิเศษกว่าในบรรดาโปเกมอน<big>ex</big> คือเมื่อ [หมดสภาพ] ฝ่ายตรงข้ามจะหยิบการ์ดรางวัลได้ 3 ใบ</p>
+
+</div>
+
+<h3>การ์ด [โบราณ] / การ์ด [อนาคต]</h3>
+
+<div class="images row-1 mb-40px">
+    <img decoding="async" src="assets/tutorial/official/th_rules_1-20.png" alt="" />
+</div>
+<p class="mb-8px">ในการ์ด [โบราณ] / การ์ด [อนาคต] มีการ์ดโปเกมอน การ์ดเทรนเนอร์ และมีสัญลักษณ์ [โบราณ] / [อนาคต] ติดอยู่</p>
+<p>ถ้ามีการระบุว่า &#8220;~ [โบราณ]&#8221; &#8220;~ [อนาคต]&#8221; ในเอฟเฟตก์ของท่าต่อสู้หรือคำอธิบายบนหน้าการ์ด ให้ดูเครื่องหมายนี้<br>
+    การ์ด [โบราณ] / การ์ด [อนาคต] ไม่มีกฎพิเศษ</p>
+
+
+<h3>โปเกมอนของเทรนเนอร์</h3>
+
+<div class="images row-1 mb-40px">
+    <img decoding="async" class="sp-card-image" src="assets/tutorial/official/th_rules_1-21.png" alt="" />
+</div>
+
+<p>โปเกมอนของเทรนเนอร์ เป็นการ์ดที่มีชื่อของเทรนเนอร์อยู่บนชื่อการ์ด เช่น โซรัวของ N</p>
+
+<div class="images row-1 mb-40px">
+    <img decoding="async" src="assets/tutorial/official/th_rules_1-22.png" alt="" />
+</div>
+
+<p>โปเกมอนของเทรนเนอร์สามารถวางซ้อนบนโปเกมอนที่มีเทรนเนอร์ชื่อเดียวกันอยู่เพื่อวิวัฒนาการได้<br>
+    (ตัวอย่าง: ฮิฮิดารุมะของ N (SV9) สามารถวิวัฒนาการจากดารุมักกะ ของ N (SV9) ได้แต่ไม่สามารถวิวัฒนาการจากดารุมักกะ (SV3) ได้)</p>
               </div>
             </div>
+            <!-- 2. ของที่ใช้ในเกม -->
+            <div id="t-view-items" class="tutorial-step-view">
+              <div class="official-content">
+<div class="h1-caption">
+	มาเตรียมของที่ใช้ในเกมกัน<br>
+	ของที่ใช้นั้น ถ้าทั้งสองฝ่ายทำการตกลงยอมรับกันแล้ว จะใช้ของอย่างอื่นแทนก็ไม่เป็นไร
+</div>
 
-            <!-- 2. Turn Sequence Guide -->
-            <div id="t-view-phases" class="tutorial-step-view">
-              <div class="tutorial-hero-banner">
-                <img src="assets/tutorial/phases.png" alt="Turn Sequence">
-              </div>
-              <h3>ลำดับการทำเทิร์นของคุณ (Your Turn Sequence)</h3>
-              <p class="description">ใน 1 เทิร์นของเกมการ์ด โปเกมอน มีขั้นตอนปฏิบัติ 3 ขั้นใหญ่ๆ ดังนี้:</p>
-              
-              <div class="phases-timeline">
-                <div class="timeline-node">
-                  <div class="node-num">1</div>
-                  <div class="node-content">
-                    <h4>จั่วการ์ดเริ่มเทิร์น (Draw Phase)</h4>
-                    <p>จั่วการ์ด 1 ใบจากกองการ์ดเสมอ หากจั่วไม่ได้เพราะการ์ดหมดกอง จะแพ้ทันที</p>
-                    <div style="margin-top: 10px;">
-                      <img src="https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg" style="height: 100px; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    </div>
-                  </div>
-                </div>
-                <div class="timeline-node">
-                  <div class="node-num">2</div>
-                  <div class="node-content">
-                    <h4>การกระทำหลักในเทิร์น (Main Action Phase)</h4>
-                    <p>คุณสามารถเลือกลำดับทำอะไรก็ได้ตามนี้:</p>
-                    <ul>
-                      <li>วางโปเกมอน Basic ลงบนเบนช์สำรอง</li>
-                      <li>วิวัฒนาการโปเกมอน (หากวางมาแล้วอย่างน้อย 1 เทิร์น)</li>
-                      <li>ติดการ์ดพลังงาน (Energy) จากบนมือ 1 ใบให้กับโปเกมอนตัวใดก็ได้ 1 ครั้งต่อเทิร์น</li>
-                      <li>ใช้งานการ์ดไอเทม (Trainer - Item) ไม่จำกัดจำนวนครั้ง หรือ การ์ดซัพพอร์ต (Support) ได้ 1 ใบต่อเทิร์น</li>
-                      <li>หนีโปเกมอนต่อสู้ (Retreat) กลับไปเบนช์โดยจ่ายพลังงานหนี</li>
-                    </ul>
-                    <div style="margin-top: 10px; display: flex; gap: 10px;">
-                      <img src="https://images.pokemontcg.io/sv1/258.png" style="height: 100px; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                      <img src="https://images.pokemontcg.io/sv1/189.png" style="height: 100px; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    </div>
-                  </div>
-                </div>
-                <div class="timeline-node">
-                  <div class="node-num">3</div>
-                  <div class="node-content">
-                    <h4>สั่งโจมตีและจบเทิร์น (Attack & End Turn)</h4>
-                    <p>สั่งโจมตีด้วยท่าที่พลังงานครบถ้วน คำนวณแดมเมจ จากนั้นเทิร์นของคุณจะจบลงทันทีโดยอัตโนมัติ</p>
-                    <div style="margin-top: 10px;">
-                      <img src="https://images.pokemontcg.io/sv3pt5/6.png" style="height: 100px; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<h2>เด็คคนละ 1 สำรับ</h2>
 
-            <!-- 3. Interactive Energy & Battle Simulator -->
-            <div id="t-view-energy" class="tutorial-step-view">
-              <div class="tutorial-hero-banner">
-                <img src="assets/tutorial/energy.png" alt="Energy and Attack">
-              </div>
-              <h3>จำลองการติดพลังงานและการทำแดมเมจ (Battle Simulator)</h3>
-              <p class="description">ทดลองติดพลังงานให้โปเกมอนของคุณ และสั่งต่อสู้เพื่อดูการคำนวณแดมเมจจริง!</p>
+<p>[เด็ค] ประกอบด้วยการ์ด 60 ใบ หนึ่งคนใช้ 1 สำรับ</p>
 
-              <div class="battle-simulator-arena">
-                <!-- Enemy Pokémon -->
-                <div class="sim-pokemon-card enemy" id="sim-enemy">
-                  <div class="pokemon-meta">
-                    <span class="name">Ogerpon ex</span>
-                    <span class="hp-indicator">HP: <strong id="sim-enemy-hp">210</strong> / 210</span>
-                  </div>
-                  <div class="pokemon-art-placeholder mask-art"></div>
-                  <div class="hp-bar-outer"><div id="sim-enemy-hp-bar" class="hp-bar-inner green" style="width: 100%"></div></div>
-                </div>
+<a href="/th/deck/first-deck/" class="link arrow">ดูกฎในการจัดเด็คได้ที่นี่</a>
 
-                <div class="battle-mid-actions">
-                  <div class="damage-popup hidden" id="damage-popup">-120</div>
-                  <div class="interaction-help">👉 ลากพลังงาน (Fire Energy) มาแปะที่ลิซาร์ดอน หรือคลิกเพื่อเพิ่มพลังงาน</div>
-                  <button id="btn-sim-attack" class="btn btn-danger btn-lg" disabled>🔥 สั่งโจมตี (ต้องการ 2 พลังงาน)</button>
-                  <button id="btn-sim-reset" class="btn btn-secondary btn-sm hidden">เริ่มจำลองใหม่</button>
-                </div>
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/rules_2-1.png" alt="" />
+</div>
 
-                <!-- Player Pokémon & Energy Deck -->
-                <div class="sim-player-section">
-                  <div class="sim-pokemon-card player" id="sim-player">
-                    <div class="pokemon-meta">
-                      <span class="name">Charizard ex</span>
-                      <span class="hp-indicator">HP: 330 / 330</span>
-                    </div>
-                    <div class="pokemon-art-placeholder charizard-art"></div>
-                    <div class="attached-energies" id="sim-attached-energies">
-                      <!-- List of attached energies will display as icons -->
-                    </div>
-                    <div class="pokemon-moves">
-                      <div class="move-item">
-                        <span class="move-cost">🔥 🔥</span>
-                        <span class="move-name">Burning Darkness (120+)</span>
-                      </div>
-                    </div>
-                  </div>
+<h2>เหรียญโปเกมอน 1 เหรียญ</h2>
 
-                  <!-- Energy Card to Drag/Click -->
-                  <div class="draggable-energy-source" id="energy-card-source" draggable="true">
-                    <div class="mini-energy-card fire">
-                      <div class="energy-symbol">🔥</div>
-                      <span>พลังงานไฟ</span>
-                    </div>
-                    <span class="drag-hint">ลาก หรือ ดับเบิลคลิกเพื่อติด</span>
-                  </div>
-                </div>
+<p>ใช้เวลาที่ในคำอธิบายท่าต่อสู้เขียนว่า [ทอยเหรียญ~] หรือเวลาที่โปเกมอนเป็นสภาวะผิดปกติ เช่น [สับสน] โดยทอยเหรียญให้ออกหัวหรือก้อยเพื่อตัดสิน ด้านที่มันวาวเป็นด้านหัว</p>
+
+<ul class="article-list">
+	<li>ถ้าเหรียญตกที่ตำแหน่งที่ผู้เล่นทั้งสองฝ่ายมองไม่เห็น ให้ทอยเหรียญใหม่</li>
+</ul>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/rules_2-2.png" alt="" />
+</div>
+
+<h3>วิธีทอยเหรียญ</h3>
+
+<p>สอดนิ้วโป้งข้างในมือแล้วกำไว้หลวม ๆ วางเหรียญโปเกมอนไว้บนนั้น<br>
+ดีดนิ้วโป้งให้เหรียญลอยหมุนกลางอากาศ 3 รอบ</p>
+
+<h2>ตัวนับแดเมจประมาณ 40 ตัว </h2>
+
+<p>ใช้แสดงแดเมจที่โปเกมอนได้รับ
+วางไว้บนการ์ดโปเกมอน</p>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/rules_2-3.png" alt="" />
+</div>
+
+<h2>เหรียญสถานะพิษ / เหรียญสถานะไหม้
+อย่างละ 1 &#8211; 2 ตัว</h2>
+
+<p>ใช้เป็นสัญลักษณ์เวลาโปเกมอนบนตำแหน่งต่อสู้มีสภาวะ [พิษ] หรือ [ไหม้] วางไว้บนการ์ดโปเกมอน</p>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/rules_2-4.png" alt="" />
+</div>
+
+<h2>เพลย์แมท 1 ใบ</h2>
+
+<p>คือที่สำหรับเล่นเกม มีตำแหน่งวางการ์ดเขียนไว้อยู่</p>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/rules_2-5.png" alt="" />
+</div>
               </div>
             </div>
+            <!-- 3. ชื่อตำแหน่ง -->
+            <div id="t-view-positions" class="tutorial-step-view">
+              <div class="official-content">
+<div class="tutorial-official-list">
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_3-01.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">1</span>สำรับการ์ด
+			</div>
+			<div class="text">คว่ำเด็ควางไว้ที่ตำแหน่ง [สำรับการ์ด]</div>
+			<div class="caption-number">
+				<span class="number">2</span>ตำแหน่งต่อสู้ (โปเกมอนบนตำแหน่งต่อสู้)
+			</div>
+			<div class="text">ตำแหน่งที่โปเกมอนใช้ท่าต่อสู้เพื่อต่อสู้ โปเกมอนที่วางบนตำแหน่งต่อสู้จะเรียกว่า [โปเกมอนบนตำแหน่งต่อสู้]</div>
+			<div class="caption-number">
+				<span class="number">3</span>เบนช์ (โปเกมอนบนเบนช์)
+			</div>
+			<div class="text">ตำแหน่งวางโปเกมอนเพื่อสลับกับโปเกมอนบนตำแหน่งต่อสู้ วางได้ไม่เกิน 5 ตัว โปเกมอนที่อยู่บนเบนช์จะเรียกว่า [โปเกมอนบนเบนช์]</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_3-02.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">4</span>การ์ดรางวัล
+			</div>
+			<div class="text">การ์ดที่หยิบได้เมื่อทำให้โปเกมอนฝ่ายตรงข้าม [หมดสภาพ] ผู้เล่นที่หยิบการ์ดรางวัลฝ่ายตัวเองได้ทั้งหมดก่อนจะเป็นฝ่ายชนะ</div>
+			<div class="caption-number">
+				<span class="number">5</span>ตำแหน่งทิ้งการ์ด
+			</div>
+			<div class="text">ตำแหน่งที่ใช้วางโปเกมอนที่ [หมดสภาพ] หรือการ์ดที่ใช้เสร็จแล้ว การวางการ์ดที่ตำแหน่งนี้จะเรียกว่า [ทิ้งที่ตำแหน่งทิ้งการ์ด] การ์ดที่ตำแหน่งทิ้งการ์ดต้องวางหงายไว้ด้านบนสุดเสมอ 
+<br>ผู้เล่นทั้งสองฝ่ายสามารถตรวจสอบข้อมูลหรือจำนวนการ์ดที่ตำแหน่งทิ้งการ์ดของฝ่ายเราหรือฝ่ายตรงข้ามได้ตลอดเวลาเล่นเกม
+			</div>
+			<div class="caption-number">
+				<span class="number">6</span>การ์ดบนมือ
+			</div>
+			<div class="text">จะใช้การ์ดนี้ในการเล่นเกม</div>
+		</div>
+	</div>
+</div>
 
-            <!-- 4. Status Conditions -->
+<h2 id="card-menu1">[กระดานฝ่ายเรา] และ [กระดานฝ่ายตรงข้าม]</h2>
+
+<h3>กระดานฝ่ายเรา</h3>
+
+<p>ตำแหน่งต่อสู้และเบนช์ฝ่ายเรา<br>
+ถ้าบนการ์ดเขียนว่า [โปเกมอนบนกระดานฝ่ายเรา] นั่นหมายถึงโปเกมอนบนตำแหน่งต่อสู้และโปเกมอนบนเบนช์ของฝ่ายเรา</p>
+
+<h3>กระดานฝ่ายตรงข้าม</h3>
+
+<p>ตำแหน่งต่อสู้และเบนช์ฝ่ายตรงข้าม<br>
+ถ้าบนการ์ดเขียนว่า [โปเกมอนบนกระดานฝ่ายตรงข้าม] นั่นหมายถึงโปเกมอนบนตำแหน่งต่อสู้และโปเกมอนบนเบนช์ของฝ่ายตรงข้าม</p>
+
+<h3>กระดาน</h3>
+
+<p>ตำแหน่งต่อสู้และเบนช์ของทั้งสองฝ่าย</p>
+              </div>
+            </div>
+            <!-- 4. ขั้นตอนเริ่มการเล่นเกม -->
+            <div id="t-view-start" class="tutorial-step-view">
+              <div class="official-content">
+<div class="h1-caption">วางการ์ดบนเพลย์แมทเพื่อเตรียมการแบตเทิล</div>
+
+
+<div class="tutorial-official-list">
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_4-01.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">1</span>ทักทายและจับมือ
+			</div>
+			<div class="text">เมื่อเริ่มต้น ให้ทักทายฝ่ายตรงข้ามว่า [ยินดีที่ได้เล่นเกมกัน] และจับมือทักทาย</div>
+			<div class="caption-number">
+				<span class="number">2</span>เป่ายิงฉุบเลือกฝ่ายเริ่มเล่นก่อน / เล่นทีหลัง
+			</div>
+			<div class="text">เป่ายิงฉุบ ผู้เล่นที่ชนะเลือกว่าจะเริ่มเล่นก่อนหรือเล่นทีหลัง</div>
+			<div class="caption-number">
+				<span class="number">3</span>วางสำรับการ์ด
+			</div>
+			<div class="text">ต่างฝ่ายต่างสับสำรับการ์ดของตัวเองให้ดี แล้ววางการ์ดคว่ำหน้าไว้ที่ตำแหน่ง [สำรับการ์ด]</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_4-02.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">4</span>จั่วการ์ด 7 ใบขึ้นมือ
+			</div>
+			<div class="text">
+				จั่วการ์ดจากด้านบนสุดของสำรับการ์ด 7 ใบแล้วนำขึ้นมือ เรียกว่า [การ์ดบนมือ] เราจะใช้การ์ดบนมือในการเล่นเกม<br>ถือการ์ดบนมือโดยไม่ให้ฝ่ายตรงข้ามเห็นหน้าการ์ด
+			</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_4-03.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">5</span>วางโปเกมอนบนตำแหน่งต่อสู้
+			</div>
+			<div class="text">เลือกการ์ด [โปเกมอนพื้นฐาน] 1 ใบจากบนมือ วางคว่ำไว้ที่
+[ตำแหน่งต่อสู้] การ์ดนี้จะเป็นโปเกมอนตัวแรกที่ใช้ต่อสู้ โปเกมอนที่วางบนตำแหน่งต่อสู้จะเรียกว่า [โปเกมอนบนตำแหน่งต่อสู้]
+</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_4-04.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">6</span> วางโปเกมอนบนเบนช์
+			</div>
+			<div class="text">หลังจากวางโปเกมอนบนตำแหน่งต่อสู้แล้ว ถ้ายังมี [โปเกมอนพื้นฐาน] บนมือ สามารถวางคว่ำไว้บนเบนช์สูงสุด 5 ใบ หรือจะไม่วางเลยสักใบก็ได้
+
+			</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_4-05.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">7</span>วางการ์ดรางวัล
+			</div>
+			<div class="text">
+				จั่วการ์ดจากด้านบนสุดของสำรับการ์ด 6 ใบ วางบนตำแหน่ง
+[การ์ดรางวัล] โดยไม่หงายหน้าการ์ด<br>
+				*การ์ดรางวัลมีความเกี่ยวข้องกับผลแพ้ชนะของเกม
+			</div>
+		</div>
+	</div>
+	<div class="tutorial-official-item">
+		<img decoding="async" src="assets/tutorial/official/th_rules_4-06.png" alt="" />
+		<div class="image-caption">
+			<div class="caption-number">
+				<span class="number">8</span>หงายการ์ดโปเกมอนแล้วเริ่มการเล่น
+			</div>
+			<div class="text">หงายการ์ดโปเกมอนบนตำแหน่งต่อสู้และโปเกมอนบนเบนช์ของทั้งสองฝ่าย แล้วเริ่มการเล่น เริ่มเกมจากเทิร์นของผู้เล่นฝ่ายเริ่มเล่นก่อน</div>
+		</div>
+	</div>
+</div>
+
+
+<h3>ถ้าไม่มี [โปเกมอนพื้นฐาน] บนมือฝ่ายเรา</h3>
+
+<p>ถ้าไม่มี [โปเกมอนพื้นฐาน] บนมือฝ่ายเราเลย ให้จั่วการ์ดบนมือใหม่อีกครั้ง ให้ฝ่ายตรงข้ามดูการ์ดบนมือเพื่อตรวจสอบว่าไม่มีจริง ๆ หลังจากนั้นให้คืนการ์ดบนมือทั้งหมดกลับสำรับการ์ดแล้วทำตั้งแต่ [3] ใหม่อีกครั้ง</p>
+
+<h3>ถ้าไม่มี [โปเกมอนพื้นฐาน] บนมือฝ่ายตรงข้าม</h3>
+
+<p>ตรวจการ์ดบนมือฝ่ายตรงข้ามแล้วเตรียมการ์ดให้เสร็จถึง<span class="number">7</span>เมื่อฝ่ายตรงข้ามเองก็เตรียมเสร็จถึง<span class="number">7</span>แล้ว เราสามารถจั่วการ์ดเพิ่ม 1ใบจากสำรับการ์ดและนำขึ้นมือได้ (หรือจะไม่จั่วก็ได้)</p>
+<p> ในกรณีที่ฝ่ายตรงข้ามจั่วการ์ดบนมือใหม่หลายครั้ง เราสามารถจั่วการ์ดจากสำรับได้สูงสุดตามจำนวนครั้งนั้นรวมกันในขั้นตอนนี้ได้ ถ้าการ์ดที่จั่วได้ตอนนี้มีการ์ด [โปเกมอนพื้นฐาน] สามารถวางบนเบนช์ได้ (หรือไม่วางก็ได้)</p>
+
+<h3>ถ้าไม่มี [โปเกมอนพื้นฐาน] บนมือทั้งสองฝ่าย</h3>
+
+<p>ถ้าไม่มี [โปเกมอนพื้นฐาน] บนมือทั้งสองฝ่าย ให้ฝ่ายตรงข้ามดูการ์ดบนมือของกันและกัน แล้วเริ่มทำใหม่ตั้งแต่<span class="number">3</span>กรณีนี้จะไม่จั่วการ์ดจากสำรับเพิ่ม</p>
+<p>กรณีที่ฝ่ายไหนทำซ้ำใหม่มากกว่า ฝ่ายตรงข้ามสามารถจั่วการ์ดจากสำรับการ์ดจนถึงตามจำนวนครั้งที่ทำซ้ำได้
+</p>
+
+<h3>เกี่ยวกับสำรับการ์ด / การ์ดรางวัล</h3>
+
+<p>เมื่อจัดสำรับการ์ดและการ์ดรางวัลเสร็จแล้ว ถ้าไม่มีคำสั่งใดเป็นพิเศษห้ามดูหน้าการ์ดโดยเด็ดขาด และไม่สามารถเปลี่ยนลำดับ หรือสับการ์ดได้อีก</p>
+
+<h3>เกี่ยวกับการ์ดบนมือ</h3>
+
+<p>ถ้าไม่มีคำสั่งใดเป็นพิเศษ ห้ามดูหน้าการ์ดบนมือของฝ่ายตรงข้ามโดยเด็ดขาด แต่สามารถตรวจสอบจำนวนการ์ดเมื่อไรก็ได้
+</p>
+<p>ในเกม จำนวนการ์ดบนมือจะมีการเปลี่ยนแปลงแต่จะไม่มีการจำกัดจำนวนการ์ด ถ้าไม่มีคำสั่งใดเป็นพิเศษ ไม่สามารถทิ้งการ์ดบนมือที่ตำแหน่งทิ้งการ์ดได้</p>
+              </div>
+            </div>
+            <!-- 5. วิธีการเล่น -->
+            <div id="t-view-howtoplay" class="tutorial-step-view">
+              <div class="official-content">
+<div class="page-nav">
+    <ul>
+        <li><a href="#card-menu1"><span>วิธีการเล่น</span></a></li>
+        <li><a href="#card-menu2"><span>สิ่งที่ทำในเทิร์นฝ่ายเรา</span></a></li>
+        <li><a href="#card-menu3"><span>วิธีการใช้ท่าต่อสู้</span></a></li>
+        <li><a href="#card-menu4"><span>จุดอ่อนและความต้านทาน</span></a></li>
+		<li><a href="#card-menu5"><span>วิธีคำนวณแดเมจ</span></a></li>
+    </ul>
+</div>
+
+<h2 id="card-menu1">วิธีการเล่น</h2>
+<p>การเล่นจะเริ่มจากเทิร์นผู้เล่นฝ่ายเริ่มเล่นก่อนและจะสลับเทิร์นไปมาระหว่างเทิร์นฝ่ายเรากับเทิร์นฝ่ายตรงข้ามจนกว่าจะรู้ผลแพ้ชนะ</p>
+
+<div class="images row-1 mb-40px">
+	<img decoding="async" src="assets/tutorial/official/th_rules_5-01.png" alt="" />
+</div>
+
+<a href="/th/rules/howtoplay/basic_rules07/#card-menu1" class="link arrow">ตรวจสอบโปเกมอน</a><br>
+<a href="/th/rules/howtoplay/basic_rules06/#card-menu2" class="link arrow">เกี่ยวกับผลแพ้ชนะของเกม</a>
+
+<h2 id="card-menu2">สิ่งที่ทำในเทิร์นฝ่ายเรา</h2>
+
+<ul class="article-list list">
+	<li>
+		<h3>จั่วการ์ด 1 ใบจากสำรับการ์ด</h3>
+		<p>ทุกครั้งที่กลับมาเทิร์นฝ่ายเรา จั่วการ์ด 1 ใบจากด้านบนสุดของสำรับการ์ดโดยไม่ดูหน้าการ์ด แล้วนำขึ้นมือ นี่คือสิ่งที่ต้องทำทุกครั้ง ในตอนเริ่มเทิร์น ผู้เล่นที่ไม่มีการ์ดแม้แต่ 1 ใบบนสำรับการ์ด จะแพ้ในทันที </p>
+		<p>(ตอนที่จั่วการ์ดใบสุดท้ายจากสำรับการ์ดจนหมดในเทิร์นก่อนหน้า จะยังไม่ถือว่าแพ้)</p>
+		<div class="images row-1">
+			<img decoding="async" src="assets/tutorial/official/th_rules_5-02.png" alt="" />
+		</div>
+	</li>
+	<li>
+		<h3>วางโปเกมอนบนเบนช์</h3>
+		<p>หากบนมือมีการ์ดโปเกมอนพื้นฐาน สามารถวางบนเบนช์ได้ โปเกมอนบนเบนช์จะมีได้ไม่เกิน 5 ตัว หากบนเบนช์มีที่ว่าง สามารถนำออกมาวางกี่ตัวก็ได้ เมื่อไหรก็ได้ในเทิร์นฝ่ายเรา</p>
+		<div class="images row-1">
+			<img decoding="async" src="assets/tutorial/official/th_rules_5-03.png" alt="" />
+		</div>
+	</li>
+	<li>
+		<h3 id="card-menu2">ติดการ์ดพลังงาน 1 ใบที่โปเกมอน</h3>
+		<p>พลังงานมีความจำเป็นสำหรับโปเกมอนในการใช้ท่าต่อสู้</p>
+		<p>ถ้ามีการ์ดพลังงานอยู่บนมือ สามารถติดที่โปเกมอนได้เทิร์นละ 1 ใบเท่านั้น จะติดที่โปเกมอนบนตำแหน่งต่อสู้หรือโปเกมอนบนเบนช์ก็ทำได้อย่างอิสระ และสามารถติดประเภทของการ์ดพลังงานที่ต่างกับประเภทของโปเกมอนก็ได้ </p>
+		<a href="#" class="link arrow">เกี่ยวกับพลังงานที่จำเป็นในการใช้ท่าต่อสู้</a>
+		<div class="images row-1">
+			<img decoding="async" src="assets/tutorial/official/th_rules_5-04.png" alt="" />
+		</div>
+	</li>
+	<li>
+		<h3>ใช้การ์ดเทรนเนอร์</h3>
+		<p>ถ้ามีการ์ดเทรนเนอร์บนมือ สามารถใช้ได้</p>
+		<p>ตอนที่ใช้ ให้นำการ์ดออกจากมือแล้วบอกผู้เล่นฝ่ายตรงข้ามว่าจะใช้ หลังจากนั้น ทำตามสิ่งที่เขียนบนการ์ด เมื่อใช้เสร็จแล้วทิ้งการ์ดเทรนเนอร์ที่ตำแหน่งทิ้งการ์ด</p>
+		<ul class="article-list">
+			<li>การ์ดซัพพอร์ตไม่สามารถใช้ได้ในเทิร์นแรกสุดของฝ่ายเริ่มเล่นก่อน</li>
+		</ul>
+		<a href="/th/rules/howtoplay/basic_rules01/#card-menu3" class="link arrow">เกี่ยวกับจำนวนการ์ดที่ใช้ได้</a>
+		<div class="images row-1">
+			<img decoding="async" src="assets/tutorial/official/th_rules_5-05.png" alt="" />
+		</div>
+	</li>
+	<li>
+		<h3>วิวัฒนาการโปเกมอน</h3>
+		<p>ถ้าบนมือมี [โปเกมอนวิวัฒนาการ] ที่จะวิวัฒนาการจากโปเกมอนบนกระดาน สามารถนำออกจากมือให้วิวัฒนาการได้ นำการ์ดนั้นมาวางซ้อนบนโปเกมอนที่มีสัญลักษณ์วิวัฒนาการเขียนไว้
+</p>
+		<div class="image-box">
+			<img decoding="async" src="assets/tutorial/official/th_rules_5-06.png" alt="" />
+			<p>โยรุโนะซึคุ นี้ วางซ้อนบน โฮโฮ เพื่อวิวัฒนาการ</p>
+		</div>
+		<h3>กฎการวิวัฒนาการโปเกมอน</h3>
+		<p>โปเกมอนที่เพิ่งวางบนกระดาน หรือโปเกมอนที่เพิ่งวิวัฒนาการจะไม่สามารถวิวัฒนาการได้ในเทิร์นนั้น จะวิวัฒนาการได้ในเทิร์นถัดไป
+ผู้เล่นทั้งสองฝ่ายไม่สามารถวิวัฒนาการได้ในเทิร์นแรกสุดของฝ่ายตนและสามารถวิวัฒนาการได้ทั้งบนตำแหน่งต่อสู้
+หรือบนเบนช์ </p>
+		<h3>โปเกมอนวิวัฒนาการคือ……</h3>
+		<p>โปเกมอนที่วิวัฒนาการแล้ว ท่าต่อสู้หรือความสามารถที่มีก่อนวิวัฒนาการจะใช้ไม่ได้อีก แม้จะวิวัฒนาการแล้ว ตัวนับแดเมจที่วางอยู่หรือพลังงานที่ติดไว้จะคงไว้เหมือนเดิม เมื่อวิวัฒนาการแล้วจะหายจากสภาวะผิดปกติ นอกจากนั้น ถ้ามีผลจากเอฟเฟกต์ที่ได้รับมา ผลนั้นก็จะหายไปด้วย (เช่น [หนีไม่ได้ในเทิร์นถัดไป] )</p>
+                <h3>ใช้ความสามารถโปเกมอน</h3>
+		<p>โปเกมอนบางตัว จะมี [ความสามารถ] ที่เป็นคนละอย่างกับท่าต่อสู้ ถ้ามีโปเกมอนที่มีความสามารถอยู่บนกระดาน โปเกมอนนั้นสามารถใช้เอฟเฟกต์นั้นได้ แจ้งให้ผู้เล่นฝ่ายตรงข้ามทราบว่าจะใช้ แล้วทำตามคำอธิบายที่เขียนไว้ 
+อีกทั้งยังมีความสามารถที่แสดงเอฟเฟกต์ออกมาโดยอัตโนมัติเพียงแค่วางบนกระดานเท่านั้น 
+และจะต่างจากท่าต่อสู้ คือแม้จะใช้ความสามารถแต่ก็ยังไม่เป็นการจบเทิร์น</p>
+		<div class="images row-1">
+			<img decoding="async" src="assets/tutorial/official/th_rules_5-07.png" alt="" />
+		</div>
+	</li>
+	<li>
+		<h3 id="card-menu6">ให้โปเกมอนบนตำแหน่งต่อสู้ [หนี]</h3>
+		<p>โปเกมอนบนตำแหน่งต่อสู้สามารถใช้ [หนี] เพื่อสลับกับโปเกมอนบนเบนช์ได้ ตอนที่ใช้ [หนี] นั้น จะทิ้งพลังงานจากโปเกมอนบนตำแหน่งต่อสู้ที่ตำแหน่งทิ้งการ์ดเท่ากับจำนวนสัญลักษณ์ ไร้สี ที่ เขียนบน [หนี] ของการ์ด 
+เมื่อให้โปเกมอนบนตำแหน่งต่อสู้หนีไปที่เบนช์แล้ว ให้เลือกโปเกมอนบนเบนช์ 1 ตัวไปวางไว้ที่ตำแหน่งต่อสู้ทันที 
+การ [หนี] จะทำได้เทิร์นละ 1 ครั้งเท่านั้นในเทิร์นฝ่ายเรา</p>
+		<div class="image-box">
+			<img decoding="async" src="assets/tutorial/official/th_rules_5-08.png" alt="" />
+			<p>จำนวนพลังงานที่จำเป็นสำหรับให้โปเกมอนนี้ [หนี] <br>
+				โปเกมอนที่ไม่มีสัญลักษณ์ไร้สี สามารถ [หนี] ได้โดยไม่ต้องทิ้งพลังงานที่ตำแหน่งทิ้งการ์ด</p>
+		</div>
+		<h3>เกี่ยวกับ [หนี]</h3>
+		<p>พลังงานที่ทิ้งจะเป็นประเภทไหนก็ได้ 
+</p>
+		<p>ถ้าไม่สามารถทิ้งพลังงานตามจำนวนที่จำเป็นจากโปเกมอนบนตำแหน่งต่อสู้ หรือไม่มีโปเกมอนบนเบนช์แม้แต่ 1 ตัว จะ [หนี] ไม่ได้ 
+</p>
+		<p>แม้จะหนีกลับเบนช์ แต่ตัวนับแดเมจที่วางอยู่หรือพลังงานที่เหลือจะคงไว้เหมือนเดิม
+</p>
+		<p>เมื่อหนีกลับเบนช์ จะหายจากสภาวะผิดปกติทั้งหมด นอกจากนั้น ถ้ามีเอฟเฟกต์ที่ได้รับมา เอฟเฟกต์นั้นก็จะหายไปด้วย (เช่น [ในเทิร์นถัดไป แดเมจจากท่าต่อสู้จะเพิ่มขึ้น] )</p>
+	</li>
+</ul>
+
+
+<h2 id="card-menu3">วิธีการใช้ท่าต่อสู้</h2>
+<ul class="article-list list">
+	<li>
+		<h3 id="card-menu7">ใช้ท่าต่อสู้ของโปเกมอนบนตำแหน่งต่อสู้ 1 ท่า</h3>
+		<p>เมื่อทำสิ่งที่ทำได้หมดแล้ว ให้ใช้ท่าต่อสู้ของโปเกมอนบนตำแหน่งต่อสู้เพื่อโจมตีโปเกมอนบนตำแหน่งต่อสู้ของฝ่ายตรงข้าม </p>
+		<ul class="article-list">
+			<li>ในเทิร์นแรกสุดของผู้เล่นฝ่ายเริ่มเล่นก่อน ตามกฎจะไม่สามารถใช้ท่าต่อสู้ได้</li>
+		</ul>
+		<p>โปเกมอนบนตำแหน่งต่อสู้เท่านั้นที่ใช้ท่าต่อสู้ได้
+</p>
+		<p>ถ้าโปเกมอนมีพลังงานที่ติดไว้ไม่เพียงพอกับพลังงานที่จำเป็นสำหรับใช้ จะใช้ท่าต่อสู้นั้นไม่ได้
+</p>
+		<p>เมื่อใช้ท่าต่อสู้เสร็จแล้ว พลังงานก็ยังคงติดไว้เช่นเดิม
+</p>
+		<p>เมื่อไม่มีท่าต่อสู้ให้ใช้ หรือไม่อยากใช้ท่าต่อสู้ ให้แจ้งผู้เล่นฝ่ายตรงข้ามว่า [จบเทิร์น] และจบเทิร์นของฝ่ายเรา</p>
+	</li>
+</ul>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/th_rules_5-12.png" alt="" />
+</div>
+
+<h3>พลังงานที่จำเป็นในการใช้ท่าต่อสู้</h3>
+<p>จำเป็นต้องใช้พลังงานต่อสู้ 1 ลูกในการใช้ท่าต่อสู้ &#8220;พาวเวอร์เจม&#8221;</p>
+<div class="images row-1 mb-40px">
+	<img decoding="async" src="assets/tutorial/official/th_rules_5-09.png" alt="" />
+</div>
+<p class="mb-40px">จำเป็นต้องใช้พลังงานประเภทใดก็ได้ 3 ลูกในการใช้ท่าต่อสู้ &#8220;เมาน์เทนฟอล&#8221; สัญลักษณ์ประเภทไร้สี คือสัญลักษณ์แสดงว่าเป็นประเภทใดก็ได้</p>
+
+<div class="images row-1 mb-40px">
+	<img decoding="async" src="assets/tutorial/official/th_rules_5-10.png" alt="" />
+</div>
+
+<p class="mb-40px">ท่าต่อสู้ที่ไม่มีพลังงานที่จำเป็นเขียนไว้สามารถใช้ได้โดยไม่ต้องติดพลังงาน</p>
+
+<div class="images row-1 mb-40px">
+	<img decoding="async" src="assets/tutorial/official/th_rules_5-11.png" alt="" />
+</div>
+
+<h3>เมื่อใช้ท่าต่อสู้แล้ว</h3>
+<p>เมื่อใช้ท่าต่อสู้แล้ว ให้ทำแดเมจกับโปเกมอนบนตำแหน่งต่อสู้ของฝ่ายตรงข้ามตามจำนวนตัวเลข ถ้ามีคำอธิบายเขียนไว้ ให้ปฏิบัติตามคำอธิบายนั้น</p>
+<ul class="article-list">
+	<li>เมื่อใช้ท่าต่อสู้เสร็จแล้ว พลังงานก็ยังคงติดไว้เช่นเดิม</li>
+</ul>
+
+
+<h2 id="card-menu4">จุดอ่อนและความต้านทาน</h2>
+<p>ถ้าโปเกมอนบนตำแหน่งต่อสู้ที่ถูกโจมตีด้วยท่าต่อสู้
+	มีจุดอ่อนหรือความต้านทาน แดเมจจากท่าต่อสู้นั้น
+	จะเปลี่ยนไป <br>
+	ตัวอย่างเช่น ราลทซ์นี้มีจุดอ่อนเป็นประเภทความมืด และมีความต้านทานในประเภทต่อสู้</p>
+<ul class="article-list">
+	<li>กรณีที่ไม่มีสัญลักษณ์เขียนไว้ จะไม่มีจุดอ่อนหรือความต้านทาน</li>
+</ul>
+
+<div class="images row-1 mb-40px">
+	<img decoding="async" src="assets/tutorial/official/th_rules_5-15.png" alt="" />
+</div>
+<p class="mb-40px">แตเมจที่ราลทซ์จะได้รับจากโปเกมอนประเภทความมืดจะกลายเป็น 2 เท่า</p>
+
+<div class="images row-1 mb-40px">
+	<img decoding="async" src="assets/tutorial/official/th_rules_5-13.png" alt="" />
+</div>
+<p class="mb-40px">แตเมจที่ราลทซ์จะได้รับจากโปเกมอนประเภทต่อสู้จะถูก [-30] </p>
+
+<div class="images row-1 mb-40px">
+	<img decoding="async" src="assets/tutorial/official/th_rules_5-14.png" alt="" />
+</div>
+<p>แดเมจที่เปลี่ยนแปลงจากจุดอ่อน・ความต้านทานจะมีผลต่อโปเกมอนบนตำแหน่งต่อสู้เท่านั้น แดเมจที่โปเกมอนบนเบนช์ได้รับจะไม่เปลี่ยนแปลง</p>
+
+<h2 id="card-menu5">วิธีคำนวณแดเมจ</h2>
+<h3>วิธีคำนวณแดเมจ</h3>
+<p>ดูตัวเลขที่อยู่ด้านขวามือของท่าต่อสู้และคำอธิบาย แล้วคำนวณแดเมจของท่าต่อสู้</p>
+
+<ul class="article-list">
+	<li>ในกรณีที่คำนวณถึงตรงนี้แล้วแดเมจเป็น 0 หรือติดลบ จะจบการคำนวณแดเมจลงตรงนี้ กรณีนี้ แปลว่าท่าต่อสู้ไม่ทำแดเมจ</li>
+</ul>
+
+<h3>คำนวณเอฟเฟกต์ที่ส่งผลเปลี่ยนแดเมจ
+(โปเกมอนที่ใช้ท่าต่อสู้)</h3>
+
+<p>&#8220;ถ้าโปเกมอนที่ใช้ท่าต่อสู้มีเอฟเฟกต์ที่เปลี่ยน
+ค่าแดเมจซึ่งมีผลอยู่ ให้ทำการคำนวณนั้น&#8221;</p>
+
+<div class="images row-1">
+	<img decoding="async" class="sp-card-image" src="assets/tutorial/official/th_rules_5-16.png" alt="" />
+</div>
+
+<h3>คำนวณจุดอ่อน</h3>
+<p>ถ้าโปเกมอนที่ได้รับแดเมจมีจุดอ่อน ค่าแดเมจจะกลายเป็น 2 เท่า</p>
+<ul class="article-list">
+	<li>กรณีที่โปเกมอนบนเบนช์ได้รับแดเมจ จะไม่คำนวณจุดอ่อน</li>
+</ul>
+
+<h3>คำนวณความต้านทาน</h3>
+<p>ถ้าโปเกมอนที่ได้รับแดเมจ มีความต้านทาน ค่าแดเมจ
+จะน้อยลงตามจำนวนที่เขียนไว้</p>
+
+<ul class="article-list">
+	<li>กรณีที่โปเกมอนบนเบนช์ได้รับแดเมจ จะไม่คำนวณความต้านทาน</li>
+</ul>
+
+<h3>คำนวณเอฟเฟกต์ที่ส่งผลเปลี่ยนแดเมจ (โปเกมอนที่ได้รับแดเมจ)</h3>
+<p>ถ้าโปเกมอนที่ได้รับแดเมจมีเอฟเฟกต์ที่เปลี่ยนค่าแดเมจซึ่งมีผลอยู่ ให้ทำการคำนวณนั้น</p>
+
+<div class="images row-1">
+	<img decoding="async" class="sp-card-image" src="assets/tutorial/official/th_rules_5-17.png" alt="" />
+</div>
+              </div>
+            </div>
+            <!-- 6. โปเกมอน [หมดสภาพ] และผลแพ้ชนะ -->
+            <div id="t-view-knockout" class="tutorial-step-view">
+              <div class="official-content">
+<div class="h1-caption">
+	&#8220;ผู้เล่นที่ทำให้โปเกมอนของฝ่ายตรงข้าม [หมดสภาพ] 1 ตัว
+	จะหยิบการ์ดรางวัลของฝ่ายตนเองได้ 1 ใบ ผู้เล่นที่หยิบการ์ดรางวัลฝ่ายตัวเองได้หมดก่อนจะเป็นฝ่ายชนะ&#8221;
+</div>
+
+<h2 id="card-menu1">โปเกมอน [หมดสภาพ]</h2>
+
+<p>โปเกมอนที่ได้รับแดเมจเท่ากับ HP ของตัวเอง จะ [หมดสภาพ]</p>
+
+<h3>ผู้เล่นที่ทำให้โปเกมอน [หมดสภาพ]</h3>
+
+<p>หยิบการ์ดรางวัลโดยไม่หงายหน้าการ์ด １ ใบแล้วนำขึ้นมือ</p>
+
+<h3>ผู้เล่นที่โปเกมอน [หมดสภาพ]</h3>
+
+<p>นำโปเกมอนที่ [หมดสภาพ] พร้อมกับการ์ดทั้งหมดที่ติดอยู่ทิ้งที่ตำแหน่งทิ้งการ์ดแล้วนำโปเกมอนบนเบนช์มาที่ตำแหน่งต่อสู้
+</p>
+<p>ถ้าราลทซ์นี้ได้รับแดเมจมากกว่าหรือเท่ากับ 70 จะ [หมดสภาพ]</p>
+
+<div class="images row-1 mb-40px">
+	<img decoding="async" src="assets/tutorial/official/th_rules_6-01.png" alt="" />
+</div>
+
+<p>การ์ดรางวัลหยิบได้ 1 ใบต่อโปเกมอนที่ [หมดสภาพ] 1 ตัว
+ถ้าทำให้โปเกมอนหลายตัว [หมดสภาพ] พร้อมกัน ให้หยิบการ์ดรางวัลตามจำนวนนั้น </p>
+<p>บางท่าต่อสู้ ก็ทำแดเมจโปเกมอนบนเบนช์และทำให้ [หมดสภาพ] ได้</p>
+
+<h2 id="card-menu2">ผลแพ้ชนะของเกม</h2>
+
+<p>เมื่อตรงตามเงื่อนไขใดเงื่อนไขหนึ่งดังนี้จะตัดสินผลแพ้ชนะได้</p>
+
+<ul class="article-list list">
+	<li>ผู้เล่นที่หยิบการ์ดรางวัลฝ่ายตัวเองได้หมดก่อนจะเป็นฝ่ายชนะ</li>
+	<li>ผู้เล่นที่ไม่เหลือโปเกมอนบนกระดานฝ่ายตนเองเลยแม้แต่ตัวเดียว จะเป็นฝ่ายแพ้โดยไม่สนใจจำนวนการ์ดรางวัลที่เหลือ</li>
+	<li>ผู้เล่นที่สำรับการ์ดหมดและไม่สามารถจั่วการ์ดจากสำรับในตอนเริ่มต้นเมื่อวนมาเทิร์นของตัวเองได้อีกจะเป็นฝ่ายแพ้โดยไม่สนใจจำนวนการ์ดรางวัล (ตอนที่สำรับการ์ดหมดในเทิร์นก่อนหน้าของฝ่ายตนเอง จะยังไม่ถือว่าแพ้)</li>
+</ul>
+              </div>
+            </div>
+            <!-- 7. การตรวจสอบโปเกมอนและสภาวะผิดปกติ -->
             <div id="t-view-status" class="tutorial-step-view">
-              <div class="tutorial-hero-banner">
-                <img src="assets/tutorial/status.png" alt="Status Conditions">
-              </div>
-              <h3>สถานะผิดปกติใน Pokémon TCG (Status Conditions)</h3>
-              <p class="description">เมื่อโปเกมอนต่อสู้ติดสภาวะผิดปกติ จะส่งผลลัพธ์บนหน้าการ์ดดังนี้:</p>
+              <div class="official-content">
+<h2 id="card-menu1">การตรวจสอบโปเกมอนคือ</h2>
 
-              <div class="status-selector-grid">
-                <button class="status-btn" data-status="poisoned">🧪 พิษ (Poisoned)</button>
-                <button class="status-btn" data-status="burned">🔥 ไหม้ (Burned)</button>
-                <button class="status-btn" data-status="asleep">💤 หลับ (Asleep)</button>
-                <button class="status-btn" data-status="paralyzed">⚡ ชา (Paralyzed)</button>
-                <button class="status-btn" data-status="confused">🌀 สับสน (Confused)</button>
-              </div>
+<p>การตรวจสอบโปเกมอนคือ การตรวจสภาวะของโปเกมอนของกันและกันทุกครั้งที่จบเทิร์น</p>
 
-              <div class="status-simulation-box">
-                <div class="status-visual-card charizard-art" id="status-card-demo">
-                  <div class="card-inner">
-                    <div class="card-inner-text">Charizard ex</div>
-                  </div>
-                  <div class="status-marker" id="status-marker-text">ปกติ</div>
-                </div>
+<h3>สิ่งที่ทำตอนตรวจสอบโปเกมอน</h3>
 
-                <div class="status-explanation" id="status-explanation-text">
-                  คลิกปุ่มสถานะด้านบนเพื่อเรียนรู้กติกาและเห็นมุมเอียงของการ์ดจริง
-                </div>
-              </div>
-            </div>
+<ul class="article-list list">
+	<li>
+		<h3>ตรวจสภาวะผิดปกติของโปเกมอน</h3>
+		<p>ตอนที่มีสภาวะผิดปกติหลายอย่างร่วมกัน ให้ตรวจสอบตามลำดับดังนี้</p>
+		<ol class="howtoplay-number-list">
+			<li>วางตัวนับแดเมจ [10] 1 ตัวบนโปเกมอนที่มีสภาวะ [พิษ]</li>
+			<li>วางตัวนับแดเมจ [10] 2 ตัวบนโปเกมอนที่มีสภาวะ [ไหม้] หลังจากนั้นให้ทอยเหรียญ ถ้าออกหัว โปเกมอนนั้นจะหายจากสภาวะ [ไหม้]</li>
+			<li>ตรวจสภาวะ [หลับ] ให้ทอยเหรียญ ถ้าออกหัว โปเกมอนนั้นหายจากสภาวะ [หลับ] ถ้าออกก้อย จะยัง [หลับ] ต่อไป</li>
+			<li>โปเกมอนที่จบเทิร์นฝ่ายตัวเอง 1 รอบด้วยสภาวะ [ชา] แล้วจะหายจากสภาวะ [ชา]</li>
+		</ol>
+	</li>
+	<li>
+		<h3>ถ้ามีความสามารถหรือการ์ดเทรนเนอร์ที่ทำงานตอนตรวจสอบโปเกมอน ก็จะได้รับเอฟเฟกต์นั้น</h3>
+		<ul class="article-list">
+			<li>การตรวจสอบสภาวะผิดปกติ / ความสามารถ / การ์ดเทรนเนอร์นั้น ทำตามลำดับใดก่อนก็ได้
+</li>
+			<li>โปเกมอนที่ไม่เหลือ HP แล้วในตอนจบการตรวจสอบโปเกมอน จะ [หมดสภาพ]</li>
+		</ul>
+	</li>
+</ul>
 
-            <!-- 5. Evolution -->
-            <div id="t-view-evolution" class="tutorial-step-view">
-              <div class="tutorial-hero-banner">
-                <img src="assets/tutorial/evolution.png" alt="Evolution">
-              </div>
-              <h3>การพัฒนาร่าง (Evolution)</h3>
-              <p class="description">คุณสามารถวางการ์ดร่างพัฒนาทับบนโปเกมอนตัวเดิมเพื่อวิวัฒนาการได้ แต่มีกฎว่า <strong>ห้ามพัฒนาร่างโปเกมอนในเทิร์นแรกที่คุณเพิ่งวางโปเกมอนตัวนั้นลงสนาม</strong> และห้ามพัฒนาร่างในเทิร์นแรกสุดของเกม</p>
-              
-              <div class="evolution-demo-area">
-                <div class="evo-tree">
-                  <div class="evo-stage basic" id="evo-stage-1">
-                    <div class="evo-card-placeholder charmander-art"></div>
-                  </div>
-                  <i data-lucide="arrow-right" class="evo-arrow"></i>
-                  <div class="evo-stage stage1 disabled" id="evo-stage-2">
-                    <div class="evo-card-placeholder charmeleon-art"></div>
-                  </div>
-                  <i data-lucide="arrow-right" class="evo-arrow"></i>
-                  <div class="evo-stage stage2 disabled" id="evo-stage-3">
-                    <div class="evo-card-placeholder charizard-art"></div>
-                  </div>
-                </div>
-                
-                <div class="evo-controls">
-                  <p id="evo-status-text">เทิร์นปัจจุบัน: โปเกมอนเพิ่งถูกลงสนาม</p>
-                  <button id="btn-next-turn-evo" class="btn btn-secondary">จำลองผ่านไป 1 เทิร์น</button>
-                  <button id="btn-evolve-sim" class="btn btn-primary" disabled>✨ กดพัฒนาร่าง!</button>
-                </div>
-              </div>
-            </div>
+<p>หลังจากตรวจสอบโปเกมอนเสร็จแล้ว จะเป็นเทิร์นถัดไปของฝ่ายตรงข้าม</p>
 
-            <!-- 6. Weakness & Resistance -->
-            <div id="t-view-weakness" class="tutorial-step-view">
-              <div class="tutorial-hero-banner">
-                <img src="assets/tutorial/weakness.png" alt="Weakness & Resistance">
-              </div>
-              <h3>จุดอ่อนและความต้านทาน (Weakness & Resistance)</h3>
-              <p class="description">โปเกมอนบางตัวมีธาตุที่แพ้ทาง (Weakness) ซึ่งจะรับแดมเมจ <strong>×2</strong> หรือชนะทาง (Resistance) ซึ่งจะรับแดมเมจน้อยลง <strong>-30</strong></p>
-              
-              <div class="weakness-demo-area">
-                <div class="weakness-battle-sim">
-                  <div class="attacker-side">
-                    <div class="mini-card-art charizard-art"></div>
-                    <div class="attacker-info">
-                      <h4>Charizard (ธาตุไฟ 🔥)</h4>
-                      <p>ท่าโจมตี: 100 แดมเมจ</p>
-                    </div>
-                  </div>
-                  
-                  <div class="attack-action-arrow">
-                    <button id="btn-calc-weakness" class="btn btn-danger">คำนวณความเสียหาย</button>
-                    <div id="damage-result-badge" class="badge hidden">100</div>
-                  </div>
+<h2 id="card-menu2">สภาวะผิดปกติคือ</h2>
 
-                  <div class="defender-side">
-                    <div class="target-selector">
-                      <label>เลือกเป้าหมายการโจมตี:</label>
-                      <select id="sim-target-select">
-                        <option value="normal">Snorlax (ปกติ)</option>
-                        <option value="weakness">Venusaur (ธาตุหญ้า 🌿 - แพ้ไฟ)</option>
-                        <option value="resistance">Blastoise (ธาตุน้ำ 💧 - ถ้าสมมติต้านทานไฟ)</option>
-                      </select>
-                    </div>
-                    <div id="target-defense-info" class="defense-info-box">
-                      จุดอ่อน: ไม่มี | ความต้านทาน: ไม่มี
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<p>สภาวะผิดปกติคือ สภาวะที่โปเกมอนบนตำแหน่งต่อสู้เป็น [พิษ] [ไหม้] [หลับ] [ชา] [สับสน] ด้วยเอฟเฟกต์จากท่าต่อสู้หรืออื่น ๆ</p>
 
-            <!-- 7. Trainer Cards -->
-            <div id="t-view-trainers" class="tutorial-step-view">
-              <div class="tutorial-hero-banner">
-                <img src="assets/tutorial/trainers.png" alt="Trainer Cards">
-              </div>
-              <h3>การ์ดเทรนเนอร์ (Trainer Cards)</h3>
-              <p class="description">การ์ดเวทมนตร์หรือตัวช่วยต่างๆ แบ่งออกเป็น 3 ประเภทหลักในยุคปัจจุบัน</p>
-              
-              <div class="trainer-cards-showcase">
-                <div class="trainer-type-card">
-                  <div class="trainer-icon bg-blue"><i data-lucide="backpack"></i></div>
-                  <h4>Item (ไอเทม)</h4>
-                  <p>ใช้งานได้ <strong>กี่ใบก็ได้</strong> ใน 1 เทิร์น ใช้เสร็จแล้วนำไปทิ้งที่ Discard Pile</p>
-                  <span class="example-text">เช่น: Potion, Ultra Ball</span>
-                </div>
-                
-                <div class="trainer-type-card">
-                  <div class="trainer-icon bg-orange"><i data-lucide="user"></i></div>
-                  <h4>Supporter (ซัพพอร์ต)</h4>
-                  <p>ใช้งานได้เพียง <strong>1 ใบ</strong> ต่อ 1 เทิร์นเท่านั้น มักจะมีผลลัพธ์รุนแรงเปลี่ยนเกม</p>
-                  <span class="example-text">เช่น: Professor's Research, Boss's Orders</span>
-                </div>
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/th_rules_7-01.png" alt="" />
+</div>
 
-                <div class="trainer-type-card">
-                  <div class="trainer-icon bg-purple"><i data-lucide="hammer"></i></div>
-                  <h4>Pokémon Tool (อุปกรณ์)</h4>
-                  <p>ติดไว้ที่โปเกมอนเพื่อเพิ่มความสามารถ โปเกมอน 1 ตัวติด Tool ได้เพียง 1 ชิ้น</p>
-                  <span class="example-text">เช่น: Choice Belt, Exp. Share</span>
-                </div>
-                
-                <div class="trainer-type-card">
-                  <div class="trainer-icon bg-green"><i data-lucide="map"></i></div>
-                  <h4>Stadium (สนาม)</h4>
-                  <p>มีผลกับทั้งสองฝ่าย วางบนโต๊ะและจะคงอยู่จนกว่าจะมี Stadium ใบอื่นถูกเล่นทับ</p>
-                  <span class="example-text">เช่น: PokéStop, Path to the Peak</span>
-                </div>
+<h3>การหายจากสภาวะผิดปกติ
+</h3>
+
+<ul class="article-list list">
+	<li>
+		<h3>นำกลับเบนช์</h3>
+		<p>สภาวะผิดปกติจะเป็นกับโปเกมอนบนตำแหน่งต่อสู้เท่านั้น และจะหายไปเมื่อ [หนี] กลับเบนช์</p>
+	</li>
+	<li>
+		<h3>วิวัฒนาการ</h3>
+		<p>เมื่อวิวัฒนาการ จะหายจากสภาวะผิดปกติ</p>
+	</li>
+	<li>
+		<h3>ใช้เอฟเฟกต์ของการ์ด</h3>
+		<p>ท่าต่อสู้หรือความสามารถของโปเกมอน
+หรือการ์ดเทรนเนอร์บางอย่าง ก็มีเอฟเฟกต์ที่ทำให้หายจากสภาวะผิดปกติ</p>
+	</li>
+</ul>
+
+<h2 id="card-menu3">เกี่ยวกับสภาวะ [พิษ]</h2>
+
+<p>สภาวะ [พิษ] เป็นสภาวะผิดปกติอย่างหนึ่ง โปเกมอนที่เป็น
+สภาวะ [พิษ] จะวางตัวนับแดเมจ [10] แดเมจทุกครั้งที่ตรวจ
+สอบโปเกมอน
+แม้จะมีสภาวะ [พิษ] ก็สามารถใช้ท่าต่อสู้หรือ [หนี] ได้</p>
+<p>สภาวะ [พิษ] เป็นพร้อมกับสภาวะผิดปกติอื่นได้</p>
+<p>โปเกมอนที่เป็นสภาวะ [พิษ] จะวาง [เหรียญสถานะพิษ] ไว้เป็นสัญลักษณ์</p>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/th_rules_7-02.png" alt="" />
+</div>
+
+<h3>ขณะที่กลายเป็นสภาวะ [พิษ]</h3>
+
+<ol class="howtoplay-number-list">
+	<li>
+		<h3>เทิร์นฝ่ายตรงข้าม</h3>
+		<p>ถูกทำให้เป็นสภาวะ [พิษ]</p>
+	</li>
+	<li>
+		<h3>ตรวจสอบโปเกมอน</h3>
+		<p>ทำแดเมจ 10</p>
+	</li>
+	<li>
+		<h3>เทิร์นฝ่ายเรา</h3>
+		<p>ถ้าไม่หายจะยังคงสภาวะ [พิษ]</p>
+	</li>
+	<li>
+		<h3>ตรวจสอบโปเกมอน</h3>
+		<p>ทำแดเมจ 10</p>
+	</li>
+</ol>
+
+<h2 id="card-menu4">เกี่ยวกับสภาวะ [ไหม้]</h2>
+
+<p>สภาวะ [ไหม้] เป็นสภาวะผิดปกติอย่างหนึ่ง โปเกมอนที่เป็น</p>
+<p>สภาวะ [ไหม้] จะวางตัวนับแดเมจ [20] แดเมจทุกครั้งที่ตรวจสอบโปเกมอน หลังจากนั้นให้เจ้าของโปเกมอนสภาวะ [ไหม้] ทอยเหรียญ ถ้าออกหัว จะหายจากสภาวะ [ไหม้] ถ้าออกก้อย จะยังคงสภาวะ [ไหม้] ต่อไป</p>
+<p>แม้จะมีสภาวะ [ไหม้] ก็สามารถใช้ท่าต่อสู้หรือ [หนี] ได้</p>
+<p>สภาวะ [ไหม้] เป็นพร้อมกับสภาวะผิดปกติอื่นได้</p>
+<p>โปเกมอนที่เป็นสภาวะ [ไหม้] จะวาง [เหรียญสถานะไหม้] ไว้เป็นสัญลักษณ์</p>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/th_rules_7-03.png" alt="" />
+</div>
+
+<h3>ขณะที่กลายเป็นสภาวะ [ไหม้]</h3>
+
+<ol class="howtoplay-number-list">
+	<li>
+		<h3>เทิร์นฝ่ายตรงข้าม</h3>
+		<p>ถูกทำให้เป็นสภาวะ [ไหม้]</p>
+	</li>
+	<li>
+		<h3>ตรวจสอบโปเกมอน</h3>
+		<p>ทำแดเมจ 20</p> 
+		<p>เหรียญออกหัว → หาย</p> 
+		<p>เหรียญออกก้อย → คงสภาวะ [ไหม้]</p> 
+	</li>
+	<li>
+		<h3>เทิร์นฝ่ายเรา</h3>
+		<p>ถ้าไม่หายจะยังคงสภาวะ [ไหม้]</p>
+	</li>
+	<li>
+		<h3>ตรวจสอบโปเกมอน</h3>
+		<p>ทำแดเมจ 20</p>
+		<p>เหรียญออกหัว → หาย</p>
+		<p>เหรียญออกก้อย → คงสภาวะ [ไหม้]</p>
+	</li>
+</ol>
+
+<h2 id="card-menu5">เกี่ยวกับสภาวะ [หลับ]</h2>
+
+<p>สภาวะ [หลับ] เป็นสภาวะผิดปกติอย่างหนึ่ง โปเกมอนที่เป็นสภาวะ [หลับ] จะไม่สามารถใช้ท่าต่อสู้หรือ [หนี] ได้ ในเทิร์นฝ่ายตัวเอง
+</p>
+<p>เจ้าของโปเกมอนสภาวะ [หลับ] ทอยเหรียญทุกครั้งที่ตรวจสอบโปเกมอน ถ้าออกหัว จะหายจากสภาวะ [หลับ] ถ้าออกก้อย จะยังคงสภาวะ [หลับ] ต่อไป
+</p>
+<p>[หลับ] เกิดพร้อมกับ [พิษ] หรือ [ไหม้] ได้ ส่วน [ชา] [สับสน] จะเกิดสภาวะผิดปกติตามสภาวะใหม่ที่ได้รับมาแทน
+</p>
+<p>โปเกมอนสภาวะ [หลับ] จะหมุนการ์ดวางแนวนอนไว้เป็นสัญลักษณ์</p>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/th_rules_7-04.png" alt="" />
+</div>
+
+<h3>ขณะที่กลายเป็นสภาวะ [หลับ]</h3>
+
+<ol class="howtoplay-number-list">
+	<li>
+		<h3>เทิร์นฝ่ายตรงข้าม</h3>
+		<p>ถูกทำให้เป็นสภาวะ [หลับ]</p>
+	</li>
+	<li>
+		<h3>ตรวจสอบโปเกมอน</h3>
+		<p>เหรียญออกหัว → หาย
+</p>
+		<p>เหรียญออกก้อย → คงสภาวะ [หลับ]</p>
+	</li>
+	<li>
+		<h3>เทิร์นฝ่ายเรา</h3>
+		<p>ถ้าไม่หายจะยังคงสภาวะ [หลับ]</p>
+	</li>
+	<li>
+		<h3>ตรวจสอบโปเกมอน</h3>
+		<p>เหรียญออกหัว → หาย
+</p>
+		<p>เหรียญออกก้อย → คงสภาวะ [หลับ]</p>
+	</li>
+</ol>
+
+<h2 id="card-menu6">เกี่ยวกับสภาวะ [ชา]</h2>
+
+<p>สภาวะ [ชา] เป็นสภาวะผิดปกติอย่างหนึ่ง ในเทิร์นของตัวเอง</p>
+<p>หลังจากโปเกมอนกลายเป็นสภาวะ [ชา] นั้นจะไม่สามารถใช้ท่าต่อสู้หรือ [หนี] ได้</p>
+<p>โปเกมอนที่จบเทิร์นฝ่ายตนเองด้วยสภาวะ [ชา] ไปแล้ว 1</p>
+<p>ครั้ง จะหายจากสภาวะนั้นหลังจากตรวจสอบโปเกมอน</p>
+<p>[ชา] เกิดพร้อมกับ [พิษ] หรือ [ไหม้] ได้ ส่วน [หลับ]</p>
+<p>[สับสน] จะเกิดสภาวะผิดปกติตามสภาวะใหม่ที่ได้รับมาแทน</p>
+<p>โปเกมอนสภาวะ [ชา] จะหมุนการ์ดวางแนวนอนไว้เป็นสัญลักษณ์</p>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/th_rules_7-05.png" alt="" />
+</div>
+
+<h3>ขณะที่กลายเป็นสภาวะ [ชา]</h3>
+
+<ol class="howtoplay-number-list">
+	<li>
+		<h3>เทิร์นฝ่ายตรงข้าม</h3>
+		<p>ถูกทำให้เป็นสภาวะ [ชา]</p>
+	</li>
+	<li>
+		<h3>ตรวจสอบโปเกมอน</h3>
+	</li>
+	<li>
+		<h3>เทิร์นฝ่ายเรา</h3>
+		<p>ถ้าไม่หายจะยังคงสภาวะ [ชา]</p>
+	</li>
+	<li>
+		<h3>ตรวจสอบโปเกมอน</h3>
+		<p>หายจากสภาวะ [ชา]</p>
+	</li>
+</ol>
+
+<h2 id="card-menu7">เกี่ยวกับสภาวะ [สับสน]</h2>
+
+<p>สภาวะ [สับสน] เป็นสภาวะผิดปกติอย่างหนึ่ง เมื่อเลือกท่าต่อสู้ที่จะใช้แล้ว เจ้าของการ์ดจะทอยเหรียญ ถ้าออกหัว จะใช้ท่าต่อสู้ได้ แต่ถ้าออกก้อย การโจมตีจะล้มเหลวและจะวางตัวนับแดเมจ 30 แดเมจบนโปเกมอนที่ใช้ท่าต่อสู้ 
+</p>
+<p>แม้เป็นสภาวะ [สับสน] ก็สามารถ [หนี] ได้ 
+</p>
+<p>[สับสน] เกิดพร้อมกับ [พิษ] หรือ [ไหม้] ได้ ส่วน [หลับ] [ชา] จะเกิดสภาวะผิดปกติตามสภาวะใหม่ที่ได้รับมาแทน
+</p>
+<p>โปเกมอนสภาวะ [สับสน] จะวางการ์ดกลับหัวไว้เป็นสัญลักษณ์</p>
+
+<div class="images row-1">
+	<img decoding="async" src="assets/tutorial/official/th_rules_7-06.png" alt="" />
+</div>
+
+<h3>ขณะที่กลายเป็นสภาวะ [สับสน]</h3>
+
+<ol class="howtoplay-number-list">
+	<li>
+		<h3>ตอนจะใช้ท่าต่อสู้ให้ทอยเหรียญ 1 ครั้ง</h3>
+		<p>เหรียญออกหัว → ใช้ท่าต่อสู้ได้
+</p>
+		<p>เหรียญออกก้อย → การโจมตีล้มเหลว ฝ่ายเราได้รับ 30 แดเมจ</p>
+	</li>
+	<li>
+		<h3>จบเทิร์นฝ่ายเรา</h3>
+	</li>
+</ol>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
     </main>
   </div>
 
@@ -763,11 +1483,11 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/cards-data.js?v=11"></script>
-  <script src="js/deck-builder.js?v=11"></script>
-  <script src="js/pack-simulator.js?v=11"></script>
-  <script src="js/binder.js?v=11"></script>
-  <script src="js/tutorial.js?v=11"></script>
-  <script src="js/app.js?v=11"></script>
+  <script src="js/cards-data.js?v=12"></script>
+  <script src="js/deck-builder.js?v=12"></script>
+  <script src="js/pack-simulator.js?v=12"></script>
+  <script src="js/binder.js?v=12"></script>
+  <script src="js/tutorial.js?v=12"></script>
+  <script src="js/app.js?v=12"></script>
 </body>
 </html>
