@@ -109,8 +109,13 @@ window.renderBinderGrid = function() {
   // Get source cards based on tab
   let sourceCards = [];
   if (window.activeTab === "collection") {
-    // Show all local database cards (so user sees their collection progress)
-    sourceCards = [...window.LOCAL_CARDS];
+    // Show only owned cards, separated individually based on quantity
+    window.LOCAL_CARDS.forEach(c => {
+      const qty = window.collectedCards[c.id] || 0;
+      for (let j = 0; j < qty; j++) {
+        sourceCards.push(c);
+      }
+    });
   } else {
     // Wishlist: show only cards in wishlist array
     sourceCards = window.LOCAL_CARDS.filter(c => window.wishlist.includes(c.id));
@@ -158,13 +163,7 @@ window.renderBinderGrid = function() {
 
       cardContainer.appendChild(card3D);
 
-      // Quantities label
-      if (isOwned && window.activeTab === "collection") {
-        const badge = document.createElement("div");
-        badge.className = "card-qty-badge";
-        badge.textContent = `x${qty}`;
-        cardContainer.appendChild(badge);
-      }
+      // Quantities label - removed since cards are now rendered individually
 
       // Double-click or click action
       card3D.addEventListener("click", () => {
