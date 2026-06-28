@@ -1229,6 +1229,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .binder-book-container {
   flex-grow: 1;
+  min-height: 0;
   background: var(--bg-white);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
