@@ -1636,30 +1636,10 @@ h1, h2, h3, h4, h5, h6 {
   background-position: center;
 }
 .pokemon-art-placeholder.mask-art {
-  background-image: linear-gradient(135deg, #1b3a1b, #0a1f0a);
   position: relative;
-}
-.pokemon-art-placeholder.mask-art::after {
-  content: "👹";
-  font-size: 3rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
-.pokemon-art-placeholder.charizard-art {
-  background-image: linear-gradient(135deg, #ff8c00, #ff4500);
-  position: relative;
-}
-.pokemon-art-placeholder.charizard-art::after {
-  content: "🐉";
-  font-size: 3rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+
 
 .hp-bar-outer {
   width: 100%;
