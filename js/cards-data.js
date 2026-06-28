@@ -442,6 +442,122 @@ window.LOCAL_CARDS = [
     marketPrice: 1.50,
     rules: ["As long as this card is attached to a Pokémon, it provides 2 Colorless Energy. The attacks of the Pokémon this card is attached to do 20 less damage to your opponent's Active Pokémon."],
     attacks: []
+  },
+  // --- Additional Classic & Meta Cards ---
+  {
+    id: "base1-58",
+    name: "Pikachu",
+    supertype: "Pokémon",
+    subtypes: ["Basic"],
+    types: ["Lightning"],
+    hp: "40",
+    rarity: "Common",
+    set: "base",
+    setName: "Base Set 1999",
+    imageUrl: "https://images.pokemontcg.io/base1/58.png",
+    marketPrice: 5.00,
+    rules: [],
+    attacks: [
+      { cost: ["Colorless"], name: "Gnaw", damage: "10", text: "" },
+      { cost: ["Lightning", "Colorless"], name: "Thunder Jolt", damage: "30", text: "Flip a coin. If tails, Pikachu does 10 damage to itself." }
+    ]
+  },
+  {
+    id: "base1-10",
+    name: "Mewtwo",
+    supertype: "Pokémon",
+    subtypes: ["Basic"],
+    types: ["Psychic"],
+    hp: "60",
+    rarity: "Rare",
+    set: "base",
+    setName: "Base Set 1999",
+    imageUrl: "https://images.pokemontcg.io/base1/10.png",
+    marketPrice: 45.00,
+    rules: [],
+    attacks: [
+      { cost: ["Psychic", "Colorless"], name: "Psychic", damage: "10+", text: "Does 10 damage plus 10 more damage for each Energy card attached to the Defending Pokémon." },
+      { cost: ["Psychic", "Psychic"], name: "Barrier", damage: "", text: "Discard 1 Psychic Energy card attached to Mewtwo in order to prevent all effects of attacks, including damage, done to Mewtwo during your opponent's next turn." }
+    ]
+  },
+  {
+    id: "swsh12-138",
+    name: "Lugia VSTAR",
+    supertype: "Pokémon",
+    subtypes: ["VSTAR"],
+    types: ["Colorless"],
+    hp: "280",
+    rarity: "Ultra Rare",
+    set: "swsh12",
+    setName: "Silver Tempest",
+    imageUrl: "https://images.pokemontcg.io/swsh12/138.png",
+    marketPrice: 15.00,
+    rules: ["VSTAR Power - Ability: Summoning Star - During your turn, you may put up to 2 Colorless Pokémon that don't have a Rule Box from your discard pile onto your Bench."],
+    attacks: [
+      { cost: ["Colorless", "Colorless", "Colorless", "Colorless"], name: "Tempest Dive", damage: "220", text: "You may discard a Stadium in play." }
+    ]
+  },
+  {
+    id: "swsh7-111",
+    name: "Rayquaza VMAX",
+    supertype: "Pokémon",
+    subtypes: ["VMAX"],
+    types: ["Dragon"],
+    hp: "320",
+    rarity: "Ultra Rare",
+    set: "swsh7",
+    setName: "Evolving Skies",
+    imageUrl: "https://images.pokemontcg.io/swsh7/111.png",
+    marketPrice: 35.00,
+    rules: ["Ability: Azure Pulse - Once during your turn, you may discard your hand and draw 3 cards."],
+    attacks: [
+      { cost: ["Fire", "Lightning"], name: "Max Burst", damage: "20+", text: "You may discard any amount of Basic Fire Energy or Basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way." }
+    ]
+  },
+  {
+    id: "swsh9-132",
+    name: "Boss's Orders",
+    supertype: "Trainer",
+    subtypes: ["Supporter"],
+    types: [],
+    hp: "",
+    rarity: "Rare Holo",
+    set: "swsh9",
+    setName: "Brilliant Stars",
+    imageUrl: "https://images.pokemontcg.io/swsh9/132.png",
+    marketPrice: 2.50,
+    rules: ["Switch 1 of your opponent's Benched Pokémon with their Active Pokémon."],
+    attacks: []
+  },
+  {
+    id: "sv01-189",
+    name: "Professor's Research",
+    supertype: "Trainer",
+    subtypes: ["Supporter"],
+    types: [],
+    hp: "",
+    rarity: "Rare Holo",
+    set: "sv01",
+    setName: "Scarlet & Violet",
+    imageUrl: "https://images.pokemontcg.io/sv01/189.png",
+    marketPrice: 1.00,
+    rules: ["Discard your hand and draw 7 cards."],
+    attacks: []
+  },
+  {
+    id: "base1-95",
+    name: "Switch",
+    supertype: "Trainer",
+    subtypes: ["Item"],
+    types: [],
+    hp: "",
+    rarity: "Common",
+    set: "base",
+    setName: "Base Set 1999",
+    imageUrl: "https://images.pokemontcg.io/base1/95.png",
+    marketPrice: 1.00,
+    rules: ["Switch your Active Pokémon with 1 of your Benched Pokémon."],
+    attacks: []
   }
 ];
 
