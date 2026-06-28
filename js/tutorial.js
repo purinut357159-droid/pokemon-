@@ -84,10 +84,16 @@ window.initTutorial = function(onRewardTickets) {
       btn.classList.add("active");
 
       const stepName = btn.getAttribute("data-step");
-      stepViews.forEach(v => v.classList.add("hidden"));
+      stepViews.forEach(v => {
+        v.classList.add("hidden");
+        v.classList.remove("active");
+      });
       
       const activeView = document.getElementById(`t-view-${stepName}`);
-      if (activeView) activeView.classList.remove("hidden");
+      if (activeView) {
+        activeView.classList.remove("hidden");
+        activeView.classList.add("active");
+      }
     });
   });
 
